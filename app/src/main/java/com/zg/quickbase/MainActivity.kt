@@ -1,6 +1,7 @@
 package com.zg.quickbase
 
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
@@ -8,8 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter4.BaseQuickAdapter
 import com.chad.library.adapter4.viewholder.QuickViewHolder
+import com.zg.quickbase.module.ui.tabbase.TabBaseActivity
 import com.zg.quickbase.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityMainBinding
+import com.zg.quickbase.module.ui.bottomnav.BottomNavActivity
+import com.zg.quickbase.module.ui.login.LoginActivity
 import com.zg.quickbase.viewmodel.MainViewModel
 
 
@@ -40,9 +44,31 @@ class MainActivity : BaseActivity() {
             mAdater.setOnItemClickListener { adapter, view, position ->
                 run {
                     mAdater.getItem(position)?.let {
-                        "${it.name}".toast()
+                        onItemClick(it, position)
                     }
                 }
+            }
+        }
+    }
+
+    private fun onItemClick(it: MainViewModel.MainRvBean, position: Int) {
+        "onItemClick".logD()
+        when (it.name) {
+
+            "LoginActivity" -> {
+                startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+            }
+
+            "TabActivity" -> {
+                startActivity(Intent(this@MainActivity, TabBaseActivity::class.java))
+            }
+
+            "BottomNavActivity" -> {
+                startActivity(Intent(this@MainActivity, BottomNavActivity::class.java))
+            }
+
+            else -> {
+                "未定义事件".toast()
             }
         }
     }

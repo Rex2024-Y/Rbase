@@ -9,9 +9,9 @@ class MainViewModel : ViewModel(){
     val data = MutableLiveData<String>()
 
     var listData = arrayListOf(
-        MainRvBean("TAB1", 1),
-        MainRvBean("TAB2", 2),
-        MainRvBean("TAB3", 2),
+        MainRvBean("LoginActivity", 1),
+        MainRvBean("TabActivity", 2),
+        MainRvBean("BottomNavActivity", 3),
     )
     class MainRvBean// name id的构造方法
         (var name: String, var id: Int) {
