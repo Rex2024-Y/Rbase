@@ -14,6 +14,7 @@ import com.zg.quickbase.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityMainBinding
 import com.zg.quickbase.module.ui.bottomnav.BottomNavActivity
 import com.zg.quickbase.module.ui.login.LoginActivity
+import com.zg.quickbase.module.ui.verticaltab.VerticalTabActivity
 import com.zg.quickbase.viewmodel.MainViewModel
 
 
@@ -65,6 +66,10 @@ class MainActivity : BaseActivity() {
 
             "BottomNavActivity" -> {
                 startActivity(Intent(this@MainActivity, BottomNavActivity::class.java))
+            }
+
+            "VerticalTabActivity" -> {
+                startActivity(Intent(this@MainActivity, VerticalTabActivity::class.java))
             }
 
             else -> {

@@ -35,6 +35,11 @@
             android:name=".module.ui.bottomnav.BottomNavActivity"
             android:exported="false"
             android:label="@string/title_activity_bottom_nav" />
+
+
+        <activity
+            android:name=".module.ui.verticaltab.VerticalTabActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
