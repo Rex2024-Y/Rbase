@@ -12,6 +12,7 @@ import com.chad.library.adapter4.viewholder.QuickViewHolder
 import com.zg.quickbase.module.ui.tabbase.TabBaseActivity
 import com.zg.quickbase.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityMainBinding
+import com.zg.quickbase.module.ui.http.HttpActivity
 import com.zg.quickbase.module.ui.bottomnav.BottomNavActivity
 import com.zg.quickbase.module.ui.login.LoginActivity
 import com.zg.quickbase.module.ui.verticaltab.VerticalTabActivity
@@ -32,7 +33,6 @@ class MainActivity : BaseActivity() {
         mViewModel = ViewModelProvider(this)[MainViewModel::class.java]
         mViewModel.run {
             mAdater.addAll(listData)
-
         }
     }
 
@@ -70,6 +70,10 @@ class MainActivity : BaseActivity() {
 
             "VerticalTabActivity" -> {
                 startActivity(Intent(this@MainActivity, VerticalTabActivity::class.java))
+            }
+
+            "HttpActivity" -> {
+                startActivity(Intent(this@MainActivity, HttpActivity::class.java))
             }
 
             else -> {

@@ -13,6 +13,8 @@ class MainViewModel : ViewModel() {
         MainRvBean("TabActivity", 2),
         MainRvBean("BottomNavActivity", 3),
         MainRvBean("VerticalTabActivity", 4),
+        MainRvBean("HttpActivity", 5),
+
     )
 
     class MainRvBean// name id的构造方法
