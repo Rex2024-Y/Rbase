@@ -5,15 +5,16 @@ import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
 
-    val title = "快速开发安卓框架(rex)"
+    val title = "快速开发框架(rex自用)"
     val data = MutableLiveData<String>()
 
     var listData = arrayListOf(
-        MainRvBean("LoginActivity", 1),
-        MainRvBean("TabActivity", 2),
-        MainRvBean("BottomNavActivity", 3),
-        MainRvBean("VerticalTabActivity", 4),
-        MainRvBean("HttpActivity", 5),
+        MainRvBean("BigDataActivity", 1),
+        MainRvBean("LoginActivity", 2),
+        MainRvBean("TabActivity", 3),
+        MainRvBean("BottomNavActivity", 4),
+        MainRvBean("VerticalTabActivity", 5),
+        MainRvBean("HttpActivity", 6),
 
     )
 

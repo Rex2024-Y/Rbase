@@ -12,6 +12,7 @@ import com.chad.library.adapter4.viewholder.QuickViewHolder
 import com.zg.quickbase.module.ui.tabbase.TabBaseActivity
 import com.zg.quickbase.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityMainBinding
+import com.zg.quickbase.module.ui.bigdata.BigDataActivity
 import com.zg.quickbase.module.ui.http.HttpActivity
 import com.zg.quickbase.module.ui.bottomnav.BottomNavActivity
 import com.zg.quickbase.module.ui.login.LoginActivity
@@ -55,6 +56,10 @@ class MainActivity : BaseActivity() {
     private fun onItemClick(it: MainViewModel.MainRvBean, position: Int) {
         "onItemClick".logD()
         when (it.name) {
+
+            "BigDataActivity" -> {
+                startActivity(Intent(this@MainActivity, BigDataActivity::class.java))
+            }
 
             "LoginActivity" -> {
                 startActivity(Intent(this@MainActivity, LoginActivity::class.java))
