@@ -41,7 +41,9 @@ open abstract class BaseActivity : AppCompatActivity() {
     abstract fun initViewModel()
 
     fun String.toast() {
-        Toast.makeText(this@BaseActivity, this, Toast.LENGTH_SHORT).show()
+        runOnUiThread {
+            Toast.makeText(this@BaseActivity, this, Toast.LENGTH_SHORT).show()
+        }
     }
 
     fun String.logD(){

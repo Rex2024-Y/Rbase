@@ -13,6 +13,7 @@ import com.zg.quickbase.module.ui.tabbase.TabBaseActivity
 import com.zg.quickbase.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityMainBinding
 import com.zg.quickbase.module.ui.bigdata.BigDataActivity
+import com.zg.quickbase.module.ui.bigdatanet.BigDataNetActivity
 import com.zg.quickbase.module.ui.http.HttpActivity
 import com.zg.quickbase.module.ui.bottomnav.BottomNavActivity
 import com.zg.quickbase.module.ui.login.LoginActivity
@@ -56,6 +57,10 @@ class MainActivity : BaseActivity() {
     private fun onItemClick(it: MainViewModel.MainRvBean, position: Int) {
         "onItemClick".logD()
         when (it.name) {
+
+            "BigDataNetActivity" -> {
+                startActivity(Intent(this@MainActivity, BigDataNetActivity::class.java))
+            }
 
             "BigDataActivity" -> {
                 startActivity(Intent(this@MainActivity, BigDataActivity::class.java))
@@ -104,7 +109,7 @@ class MainActivity : BaseActivity() {
             item: MainViewModel.MainRvBean?
         ) {
             item?.run {
-                holder.setText(R.id.btTitle, name)
+                holder.setText(R.id.btTitle, text)
             }
         }
     }

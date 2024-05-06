@@ -53,6 +53,11 @@
         <activity
             android:name=".module.ui.verticaltab.VerticalTabActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".module.ui.bigdatanet.BigDataNetActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

@@ -85,11 +85,13 @@ class VerticalTabActivity : BaseActivity() {
 
         binding.viewPager.isUserInputEnabled = false
 
-        rvAdapter.addAll(arrayListOf(
-            MainViewModel.MainRvBean("Home", 1),
-            MainViewModel.MainRvBean("DashBoard", 2),
-            MainViewModel.MainRvBean("Notifications", 3),
-        ))
+        rvAdapter.addAll(
+            arrayListOf(
+                MainViewModel.MainRvBean("Home", "", 1),
+                MainViewModel.MainRvBean("DashBoard", "", 2),
+                MainViewModel.MainRvBean("Notifications", "", 3),
+            )
+        )
     }
 
     override fun initViewModel() {
