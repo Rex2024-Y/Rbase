@@ -1,6 +1,8 @@
 package com.zg.quickbase
 
 import android.content.Context
+import android.content.DialogInterface
+import android.content.DialogInterface.OnClickListener
 import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +18,7 @@ import com.zg.quickbase.module.ui.bigdata.BigDataActivity
 import com.zg.quickbase.module.ui.bigdatanet.BigDataNetActivity
 import com.zg.quickbase.module.ui.http.HttpActivity
 import com.zg.quickbase.module.ui.bottomnav.BottomNavActivity
+import com.zg.quickbase.module.ui.funcation.FunctionActivity
 import com.zg.quickbase.module.ui.login.LoginActivity
 import com.zg.quickbase.module.ui.verticaltab.VerticalTabActivity
 import com.zg.quickbase.viewmodel.MainViewModel
@@ -56,34 +59,73 @@ class MainActivity : BaseActivity() {
 
     private fun onItemClick(it: MainViewModel.MainRvBean, position: Int) {
         "onItemClick".logD()
-        when (it.name) {
+        when (it.id) {
+            1 -> {
+                showListDialog(
+                    it.text, arrayOf("在线", "离线")
+                ) { dialog, which ->
+                    when (which) {
+                        0 -> {
+                            BigDataNetActivity::class.java.start()
+                        }
 
-            "BigDataNetActivity" -> {
-                startActivity(Intent(this@MainActivity, BigDataNetActivity::class.java))
+                        1 -> {
+                            BigDataActivity::class.java.start()
+                        }
+                    }
+                    dialog.dismiss()
+                }
             }
 
-            "BigDataActivity" -> {
-                startActivity(Intent(this@MainActivity, BigDataActivity::class.java))
+            2 -> {
+                showListDialog(
+                    it.text, arrayOf("升级检测")
+                ) { dialog, which ->
+                    when (which) {
+                        0 -> {
+                            FunctionActivity::class.java.start()
+                        }
+                    }
+                    dialog.dismiss()
+                }
             }
 
-            "LoginActivity" -> {
-                startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+            3 -> {
+                showListDialog(
+                    it.text, arrayOf("网络框架")
+                ) { dialog, which ->
+                    when (which) {
+                        0 -> {
+                            HttpActivity::class.java.start()
+                        }
+                    }
+                    dialog.dismiss()
+                }
             }
 
-            "TabActivity" -> {
-                startActivity(Intent(this@MainActivity, TabBaseActivity::class.java))
-            }
+            4 -> {
+                showListDialog(
+                    it.text, arrayOf("Login", "Tab", "Nav", "VTab")
+                ) { dialog, which ->
+                    when (which) {
+                        0 -> {
+                            LoginActivity::class.java.start()
+                        }
 
-            "BottomNavActivity" -> {
-                startActivity(Intent(this@MainActivity, BottomNavActivity::class.java))
-            }
+                        1 -> {
+                            TabBaseActivity::class.java.start()
+                        }
 
-            "VerticalTabActivity" -> {
-                startActivity(Intent(this@MainActivity, VerticalTabActivity::class.java))
-            }
+                        2 -> {
+                            BottomNavActivity::class.java.start()
+                        }
 
-            "HttpActivity" -> {
-                startActivity(Intent(this@MainActivity, HttpActivity::class.java))
+                        3 -> {
+                            VerticalTabActivity::class.java.start()
+                        }
+                    }
+                    dialog.dismiss()
+                }
             }
 
             else -> {

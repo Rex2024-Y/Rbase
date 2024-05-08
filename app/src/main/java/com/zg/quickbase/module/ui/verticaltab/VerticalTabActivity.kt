@@ -58,7 +58,7 @@ class VerticalTabActivity : BaseActivity() {
                 item: MainViewModel.MainRvBean?
             ) {
                 item?.run {
-                    holder.setText(R.id.btTitle, name)
+                    holder.setText(R.id.btTitle, text)
                 }
             }
         }

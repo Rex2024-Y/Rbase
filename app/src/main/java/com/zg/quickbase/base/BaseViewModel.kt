@@ -9,6 +9,11 @@ open class BaseViewModel : ViewModel(){
         LogUtils.logD(this@BaseViewModel.javaClass.simpleName,this)
     }
 
+    fun String.logI(){
+        LogUtils.logI(this@BaseViewModel.javaClass.simpleName,this)
+    }
+
+
     fun String.logE(){
         LogUtils.logE(this@BaseViewModel.javaClass.simpleName,this)
     }

@@ -9,17 +9,14 @@ class MainViewModel : ViewModel() {
     val data = MutableLiveData<String>()
 
     var listData = arrayListOf(
-        MainRvBean("BigDataNetActivity", "在线识别", 1),
-        MainRvBean("BigDataActivity", "离线识别", 2),
-        MainRvBean("LoginActivity", "登录", 3),
-        MainRvBean("TabActivity", "顶部导航", 4),
-        MainRvBean("BottomNavActivity", "底部导航", 5),
-        MainRvBean("VerticalTabActivity", "左边导航", 6),
-        MainRvBean("HttpActivity", "网络", 7),
-
-        )
+        MainRvBean("AI图片识别", 1),
+        MainRvBean("功能框架", 2),
+        MainRvBean("网络框架", 3),
+        MainRvBean("界面框架", 4),
+    )
 
     class MainRvBean// name id的构造方法
         (var name: String, var text: String, var id: Int) {
+        constructor(text: String, id: Int) : this("", text, id)
     }
 }
