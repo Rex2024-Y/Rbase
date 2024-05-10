@@ -15,6 +15,7 @@ lifecycleViewmodelKtx = "2.6.1"
 annotation = "1.6.0"
 navigationFragmentKtx = "2.6.0"
 navigationUiKtx = "2.6.0"
+serialport = "2.1.1"
 tensorflowLite = "2.0.0"
 updateapputils = "2.3.0"
 
@@ -32,6 +33,7 @@ androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifec
 androidx-annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation" }
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
+serialport = { module = "io.github.xmaihh:serialport", version.ref = "serialport" }
 tensorflow-lite = { module = "org.tensorflow:tensorflow-lite", version.ref = "tensorflowLite" }
 updateapputils = { module = "com.teprinciple:updateapputils", version.ref = "updateapputils" }
 

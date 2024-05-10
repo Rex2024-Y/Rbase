@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.ACCESS_SUPERUSER" />
 
     <application
         android:allowBackup="true"
@@ -72,7 +73,13 @@
             android:exported="false" />
 
         <activity
-            android:name=".module.ui.funcation.FunctionActivity"
+            android:name=".module.ui.function.FunctionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".module.ui.function.WebViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".module.ui.hardware.HardwareActivity"
             android:exported="false" />
     </application>
 

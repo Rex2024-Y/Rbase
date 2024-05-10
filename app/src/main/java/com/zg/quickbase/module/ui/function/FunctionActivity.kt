@@ -1,4 +1,4 @@
-package com.zg.quickbase.module.ui.funcation
+package com.zg.quickbase.module.ui.function
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,8 +7,6 @@ import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import android.view.View
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider

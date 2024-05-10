@@ -1,9 +1,7 @@
 package com.zg.quickbase
 
 import android.content.Context
-import android.content.DialogInterface
-import android.content.DialogInterface.OnClickListener
-import android.content.Intent
+import android.os.Build
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
@@ -18,7 +16,9 @@ import com.zg.quickbase.module.ui.bigdata.BigDataActivity
 import com.zg.quickbase.module.ui.bigdatanet.BigDataNetActivity
 import com.zg.quickbase.module.ui.http.HttpActivity
 import com.zg.quickbase.module.ui.bottomnav.BottomNavActivity
-import com.zg.quickbase.module.ui.funcation.FunctionActivity
+import com.zg.quickbase.module.ui.function.FunctionActivity
+import com.zg.quickbase.module.ui.function.WebViewActivity
+import com.zg.quickbase.module.ui.hardware.HardwareActivity
 import com.zg.quickbase.module.ui.login.LoginActivity
 import com.zg.quickbase.module.ui.verticaltab.VerticalTabActivity
 import com.zg.quickbase.viewmodel.MainViewModel
@@ -39,6 +39,8 @@ class MainActivity : BaseActivity() {
         mViewModel.run {
             mAdater.addAll(listData)
         }
+
+        "Build.VERSION.SDK_INT ${Build.VERSION.SDK_INT}".logI()
     }
 
     override fun initView() {
@@ -79,11 +81,15 @@ class MainActivity : BaseActivity() {
 
             2 -> {
                 showListDialog(
-                    it.text, arrayOf("升级检测")
+                    it.text, arrayOf("升级检测", "WebView")
                 ) { dialog, which ->
                     when (which) {
                         0 -> {
                             FunctionActivity::class.java.start()
+                        }
+
+                        1 -> {
+                            WebViewActivity::class.java.start()
                         }
                     }
                     dialog.dismiss()
@@ -122,6 +128,31 @@ class MainActivity : BaseActivity() {
 
                         3 -> {
                             VerticalTabActivity::class.java.start()
+                        }
+                    }
+                    dialog.dismiss()
+                }
+            }
+
+            5 -> {
+                showListDialog(
+                    it.text, arrayOf("串口", "蓝牙", "WIFI", "USB")
+                ) { dialog, which ->
+                    when (which) {
+                        0 -> {
+                            HardwareActivity::class.java.start()
+                        }
+
+                        1 -> {
+                            HardwareActivity::class.java.start()
+                        }
+
+                        2 -> {
+                            HardwareActivity::class.java.start()
+                        }
+
+                        3 -> {
+                            HardwareActivity::class.java.start()
                         }
                     }
                     dialog.dismiss()

@@ -1,7 +1,6 @@
-package com.zg.quickbase.module.ui.funcation
+package com.zg.quickbase.module.ui.function
 
 import android.app.Activity
-import android.content.Context
 import android.os.Environment
 import androidx.lifecycle.MutableLiveData
 import com.zg.quickbase.base.BaseViewModel

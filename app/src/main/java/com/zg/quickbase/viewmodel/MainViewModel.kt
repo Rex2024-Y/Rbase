@@ -13,6 +13,8 @@ class MainViewModel : ViewModel() {
         MainRvBean("功能框架", 2),
         MainRvBean("网络框架", 3),
         MainRvBean("界面框架", 4),
+        MainRvBean("硬件通信", 5),
+
     )
 
     class MainRvBean// name id的构造方法
