@@ -1,14 +1,26 @@
 package com.zg.quickbase.module.ui.function
 
 import android.annotation.SuppressLint
+import android.content.ContentValues
+import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.net.Uri
+import android.os.Environment
+import android.provider.MediaStore
 import android.view.View
 import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import com.zg.quickbase.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityWebviewBinding
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 
 /**
@@ -67,6 +79,30 @@ class WebViewActivity : BaseActivity() {
 
             });
 
+        }
+
+        binding.savePhoto.setOnClickListener {
+            binding.savePhoto.visibility = View.GONE
+            val view = window.decorView
+            val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(bitmap)
+            view.draw(canvas)
+            try {
+                val fileName = Environment.getExternalStorageDirectory().path + "/webview_jietu.jpg"
+                "$fileName".logI()
+                val fos = FileOutputStream(fileName)
+                //压缩bitmap到输出流中
+                bitmap!!.compress(Bitmap.CompressFormat.JPEG, 70, fos)
+                fos.close()
+                Toast.makeText(this@WebViewActivity, "截屏成功", Toast.LENGTH_LONG).show()
+                binding.ivPreview.setImageBitmap(bitmap)
+                binding.savePhoto.visibility = View.VISIBLE
+            } catch (e: Exception) {
+            } finally {
+//                if (bitmap != null) {
+//                    bitmap.recycle()
+//                }
+            }
         }
     }
 

@@ -34,6 +34,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            signingConfig signingConfigs.config
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -52,15 +58,7 @@ android {
         noCompress "tflite"
     }
 
-//    externalNativeBuild {
-////        ndkBuild {
-////            path 'src/main/jni/Android.mk'
-////        }
-//        cmake {
-//            version "3.22.1"
-//        }
-//    }
-//    ndkVersion '27.0.11718014 rc1'
+
 }
 
 dependencies {

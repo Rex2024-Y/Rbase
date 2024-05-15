@@ -17,3 +17,9 @@ keytool -list -v -keystore androidkey.jks -storepass 123456
 签名算法名称: SHA256withRSA
 主体公共密钥算法: 2048 位 RSA 密钥
 版本: 1
+
+Alias: rex2024
+MD5: 1F:4B:CB:8A:3A:F2:DE:C6:8B:73:DF:E1:26:8B:5E:C3
+SHA1: 76:73:4A:33:EF:23:D6:0A:21:36:34:A4:05:AA:78:C7:4F:AB:68:2E
+SHA-256: 15:67:30:B0:E1:8C:C8:A1:96:37:90:70:08:F1:E1:CF:6D:5E:BE:4F:74:30:C3:9A:B7:C0:93:EC:78:3F:2C:DB
+Valid until: 2124年4月12日星期三
