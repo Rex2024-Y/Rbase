@@ -17,8 +17,26 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        config {
+            keyAlias 'rex2024'
+            keyPassword '123456'
+            storeFile file('../androidkey.jks')
+            storePassword '123456'
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig signingConfigs.config
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            signingConfig signingConfigs.config
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -34,6 +52,13 @@ android {
     buildFeatures{
         viewBinding true
     }
+
+    aaptOptions {
+        // 不压缩数据模型
+        noCompress "tflite"
+    }
+
+
 }
 
 dependencies {
@@ -57,4 +82,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.14.9'
+
+    implementation libs.tensorflow.lite
+
+    implementation libs.serialport
+
+//    implementation 'com.github.F1ReKing:Android-SerialPort:1.6.0'
+
 }

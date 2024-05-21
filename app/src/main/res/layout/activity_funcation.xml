@@ -15,14 +15,15 @@
             android:id="@+id/btLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Post Login" />
+            android:layout_margin="10dp"
+            android:text="检测Apk更新" />
 
         <Button
-            android:id="@+id/btGet"
+            android:id="@+id/btInstall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Get Info" />
+            android:layout_margin="10dp"
+            android:text="安装下载" />
     </LinearLayout>
 
     <View

@@ -5,19 +5,22 @@ import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
 
-    val title = "快速开发安卓框架(rex)"
+    val title = "快速开发框架(rex自用)"
     val data = MutableLiveData<String>()
 
     var listData = arrayListOf(
-        MainRvBean("LoginActivity", 1),
-        MainRvBean("TabActivity", 2),
-        MainRvBean("BottomNavActivity", 3),
-        MainRvBean("VerticalTabActivity", 4),
-        MainRvBean("HttpActivity", 5),
+        MainRvBean("网页相关", 1),
+        MainRvBean("功能框架", 2),
+        MainRvBean("AI图片识别", 3),
+        MainRvBean("网络框架", 4),
+        MainRvBean("界面框架", 5),
+        MainRvBean("硬件通信", 6),
+
 
     )
 
     class MainRvBean// name id的构造方法
-        (var name: String, var id: Int) {
+        (var name: String, var text: String, var id: Int) {
+        constructor(text: String, id: Int) : this("", text, id)
     }
 }

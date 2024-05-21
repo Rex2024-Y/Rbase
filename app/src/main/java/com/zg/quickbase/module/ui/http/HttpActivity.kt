@@ -4,7 +4,6 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.zg.quickbase.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityHttpBinding
-import com.zg.quickbase.viewmodel.MainViewModel
 
 /**
  * 展示两个网络请求demo
