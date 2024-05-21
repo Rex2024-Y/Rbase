@@ -9,11 +9,13 @@ class MainViewModel : ViewModel() {
     val data = MutableLiveData<String>()
 
     var listData = arrayListOf(
-        MainRvBean("AI图片识别", 1),
+        MainRvBean("网页相关", 1),
         MainRvBean("功能框架", 2),
-        MainRvBean("网络框架", 3),
-        MainRvBean("界面框架", 4),
-        MainRvBean("硬件通信", 5),
+        MainRvBean("AI图片识别", 3),
+        MainRvBean("网络框架", 4),
+        MainRvBean("界面框架", 5),
+        MainRvBean("硬件通信", 6),
+
 
     )
 

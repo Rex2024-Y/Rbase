@@ -18,6 +18,7 @@ import com.zg.quickbase.module.ui.http.HttpActivity
 import com.zg.quickbase.module.ui.bottomnav.BottomNavActivity
 import com.zg.quickbase.module.ui.function.FunctionActivity
 import com.zg.quickbase.module.ui.function.WebViewActivity
+import com.zg.quickbase.module.ui.function.WebViewLocalActivity
 import com.zg.quickbase.module.ui.hardware.HardwareActivity
 import com.zg.quickbase.module.ui.login.LoginActivity
 import com.zg.quickbase.module.ui.verticaltab.VerticalTabActivity
@@ -62,9 +63,26 @@ class MainActivity : BaseActivity() {
     private fun onItemClick(it: MainViewModel.MainRvBean, position: Int) {
         "onItemClick".logD()
         when (it.id) {
+
             1 -> {
                 showListDialog(
-                    it.text, arrayOf("在线", "离线")
+                    it.text, arrayOf("服务端网页", "本地网页")
+                ) { dialog, which ->
+                    when (which) {
+                        0 -> {
+                            WebViewActivity::class.java.start()
+                        }
+
+                        1 -> {
+                            WebViewLocalActivity::class.java.start()
+                        }
+                    }
+                    dialog.dismiss()
+                }
+            }
+            2 -> {
+                showListDialog(
+                    it.text, arrayOf("在线")
                 ) { dialog, which ->
                     when (which) {
                         0 -> {
@@ -72,24 +90,8 @@ class MainActivity : BaseActivity() {
                         }
 
                         1 -> {
-                            BigDataActivity::class.java.start()
-                        }
-                    }
-                    dialog.dismiss()
-                }
-            }
-
-            2 -> {
-                showListDialog(
-                    it.text, arrayOf("升级检测", "WebView")
-                ) { dialog, which ->
-                    when (which) {
-                        0 -> {
-                            FunctionActivity::class.java.start()
-                        }
-
-                        1 -> {
-                            WebViewActivity::class.java.start()
+                            "暂不好用".toast()
+//                            BigDataActivity::class.java.start()
                         }
                     }
                     dialog.dismiss()
@@ -97,6 +99,20 @@ class MainActivity : BaseActivity() {
             }
 
             3 -> {
+                showListDialog(
+                    it.text, arrayOf("升级检测")
+                ) { dialog, which ->
+                    when (which) {
+                        0 -> {
+                            FunctionActivity::class.java.start()
+                        }
+
+                    }
+                    dialog.dismiss()
+                }
+            }
+
+            4 -> {
                 showListDialog(
                     it.text, arrayOf("网络框架")
                 ) { dialog, which ->
@@ -109,7 +125,7 @@ class MainActivity : BaseActivity() {
                 }
             }
 
-            4 -> {
+            5 -> {
                 showListDialog(
                     it.text, arrayOf("Login", "Tab", "Nav", "VTab")
                 ) { dialog, which ->
@@ -134,9 +150,10 @@ class MainActivity : BaseActivity() {
                 }
             }
 
-            5 -> {
+            6 -> {
                 showListDialog(
-                    it.text, arrayOf("串口", "蓝牙", "WIFI", "USB")
+//                    , "蓝牙", "WIFI", "USB"
+                    it.text, arrayOf("串口")
                 ) { dialog, which ->
                     when (which) {
                         0 -> {

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Android H5互相调用</title>
+</head>
+<body>
+<h1>安卓与H5通信示例</h1>
+<button type="button" id="button1" onclick="callAndroid()">网页调安卓</button>
+<script>
+    // Android需要调用的方法
+    function callJS() {
+        alert("Android调用了JS的callJS方法");
+        return "666"
+    }
+    // 安卓端定义的对象androidObj  sendToAndroid 定义的方法
+    function callAndroid() {
+      androidObj.sendToAndroid("js调用了android中的sendToAndroid方法");
+    }
+</script>
+</body>
+</html>

@@ -15,7 +15,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="保存图片" />
+        android:text="保存图片"
+        android:visibility="gone" />
 
     <ImageView
         android:id="@+id/ivPreview"
@@ -25,5 +26,26 @@
         android:layout_centerHorizontal="true"
         android:adjustViewBounds="true"
         android:background="@android:color/holo_red_dark"
-        android:padding="3dp" />
+        android:padding="3dp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/etUrl"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="请输入新网页" />
+
+        <Button
+            android:id="@+id/btGo"
+            android:layout_width="wrap_content"
+            android:text="Go"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 </RelativeLayout>

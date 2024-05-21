@@ -24,12 +24,11 @@ import java.io.IOException
 
 
 /**
- * 展示两个网络请求demo
  */
 class WebViewActivity : BaseActivity() {
 
     private lateinit var binding: ActivityWebviewBinding
-
+    var mUrl = "https://blog.csdn.net/weixin_48618536/article/details/121699741"
 
     override fun getRoot(): View {
         binding = ActivityWebviewBinding.inflate(layoutInflater)
@@ -72,42 +71,62 @@ class WebViewActivity : BaseActivity() {
                     request: WebResourceRequest?
                 ): Boolean {
                     request?.url?.run {
-                        view?.loadUrl(this.path.toString())
+                        view?.loadUrl(this.toString())
                     }
-                    return true;
+                    return true
                 }
 
             });
 
         }
 
-        binding.savePhoto.setOnClickListener {
-            binding.savePhoto.visibility = View.GONE
-            val view = window.decorView
-            val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
-            val canvas = Canvas(bitmap)
-            view.draw(canvas)
-            try {
-                val fileName = Environment.getExternalStorageDirectory().path + "/webview_jietu.jpg"
-                "$fileName".logI()
-                val fos = FileOutputStream(fileName)
-                //压缩bitmap到输出流中
-                bitmap!!.compress(Bitmap.CompressFormat.JPEG, 70, fos)
-                fos.close()
-                Toast.makeText(this@WebViewActivity, "截屏成功", Toast.LENGTH_LONG).show()
-                binding.ivPreview.setImageBitmap(bitmap)
-                binding.savePhoto.visibility = View.VISIBLE
-            } catch (e: Exception) {
-            } finally {
-//                if (bitmap != null) {
-//                    bitmap.recycle()
-//                }
-            }
+        binding.btGo.setOnClickListener {
+            mUrl = binding.etUrl.text.toString().trim()
+            "mUrl:$mUrl".logI()
+            binding.webView.loadUrl(mUrl)
         }
+
+//        binding.savePhoto.setOnClickListener {
+//            binding.savePhoto.visibility = View.GONE
+//            val view = window.decorView
+//            val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+//            val canvas = Canvas(bitmap)
+//            view.draw(canvas)
+//            try {
+//                val fileName = Environment.getExternalStorageDirectory().path + "/webview_jietu.jpg"
+//                "$fileName".logI()
+//                val fos = FileOutputStream(fileName)
+//                //压缩bitmap到输出流中
+//                bitmap!!.compress(Bitmap.CompressFormat.JPEG, 70, fos)
+//                fos.close()
+//                Toast.makeText(this@WebViewActivity, "截屏成功", Toast.LENGTH_LONG).show()
+//                binding.ivPreview.setImageBitmap(bitmap)
+//                binding.savePhoto.visibility = View.VISIBLE
+//            } catch (e: Exception) {
+//            } finally {
+////                if (bitmap != null) {
+////                    bitmap.recycle()
+////                }
+//            }
+//        }
     }
 
     override fun initViewModel() {
-        binding.webView.loadUrl("https://blog.csdn.net/weixin_48618536/article/details/121699741")
+        binding.webView.loadUrl(mUrl)
+        binding.etUrl.setText(mUrl)
+    }
+
+    // 重写返回键 网页有跳转返回网页上一页
+    @SuppressLint("MissingSuperCall")
+    override fun onBackPressed() {
+        "onBackPressed".logD()
+        //super.onBackPressed();
+        if (binding.webView.canGoBack()) {
+            binding.webView.goBack();
+        } else {
+            finish();
+        }
+
     }
 
 
