@@ -2,7 +2,11 @@ package com.zg.quickbase.module.ui.function
 
 import android.annotation.SuppressLint
 import android.view.View
+import android.webkit.ConsoleMessage
 import android.webkit.JavascriptInterface
+import android.webkit.JsPromptResult
+import android.webkit.JsResult
+import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
@@ -17,7 +21,7 @@ import com.zg.quickbase.databinding.ActivityWebviewLocalBinding
 class WebViewLocalActivity : BaseActivity() {
 
     private lateinit var binding: ActivityWebviewLocalBinding
-    var mLocalUrl = "file:///android_asset/localdemo.html"
+    var mLocalUrl = "file:///android_asset/index.html"
 
     override fun getRoot(): View {
         binding = ActivityWebviewLocalBinding.inflate(layoutInflater)
@@ -66,6 +70,33 @@ class WebViewLocalActivity : BaseActivity() {
                 }
 
             })
+
+            binding.webView.webChromeClient = object :WebChromeClient(){
+                override fun onConsoleMessage(consoleMessage: ConsoleMessage?): Boolean {
+                    "onConsoleMessage:${consoleMessage?.message()}".logI()
+                    return super.onConsoleMessage(consoleMessage)
+                }
+
+                override fun onJsAlert(
+                    view: WebView?,
+                    url: String?,
+                    message: String?,
+                    result: JsResult?
+                ): Boolean {
+                    "onJsAlert:url url message ${message}".logI()
+                    return super.onJsAlert(view, url, message, result)
+                }
+
+                override fun onJsPrompt(
+                    view: WebView?,
+                    url: String?,
+                    message: String?,
+                    defaultValue: String?,
+                    result: JsPromptResult?
+                ): Boolean {
+                    return super.onJsPrompt(view, url, message, defaultValue, result)
+                }
+            }
 
         }
 

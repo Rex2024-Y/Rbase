@@ -80,9 +80,10 @@ class MainActivity : BaseActivity() {
                     dialog.dismiss()
                 }
             }
+
             2 -> {
                 showListDialog(
-                    it.text, arrayOf("在线")
+                    it.text, arrayOf("人脸识别（本地库）", "人脸识别（云端库）", "在线识别")
                 ) { dialog, which ->
                     when (which) {
                         0 -> {
@@ -90,6 +91,14 @@ class MainActivity : BaseActivity() {
                         }
 
                         1 -> {
+                            BigDataNetActivity::class.java.start()
+                        }
+
+                        2 -> {
+                            BigDataNetActivity::class.java.start()
+                        }
+
+                        3 -> {
                             "暂不好用".toast()
 //                            BigDataActivity::class.java.start()
                         }
