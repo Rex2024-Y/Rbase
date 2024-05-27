@@ -1,7 +1,6 @@
 package com.zg.quickbase.module.ui.verticaltab
 
 import android.content.Context
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -10,12 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.chad.library.adapter4.BaseQuickAdapter
 import com.chad.library.adapter4.viewholder.QuickViewHolder
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
-import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener
 import com.zg.quickbase.R
 import com.zg.quickbase.base.BaseActivity
-import com.zg.quickbase.databinding.ActivityBottomNavBinding
 import com.zg.quickbase.databinding.ActivityLeftTabBinding
 import com.zg.quickbase.module.ui.bottomnav.ui.dashboard.DashboardFragment
 import com.zg.quickbase.module.ui.bottomnav.ui.home.HomeFragment

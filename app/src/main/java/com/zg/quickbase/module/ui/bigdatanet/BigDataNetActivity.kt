@@ -1,34 +1,17 @@
 package com.zg.quickbase.module.ui.bigdatanet
 
 import android.Manifest
-import android.R
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
-import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.zg.quickbase.base.BaseActivity
-import com.zg.quickbase.databinding.ActivityBigDataBinding
 import com.zg.quickbase.databinding.ActivityBigDataNetBinding
-import com.zg.quickbase.viewmodel.MainViewModel
-import org.tensorflow.lite.Interpreter
-import java.io.BufferedReader
-import java.io.FileInputStream
-import java.io.IOException
-import java.io.InputStreamReader
-import java.nio.ByteBuffer
-import java.nio.ByteOrder
-import java.nio.MappedByteBuffer
-import java.nio.channels.FileChannel
 
 
 class BigDataNetActivity : BaseActivity() {

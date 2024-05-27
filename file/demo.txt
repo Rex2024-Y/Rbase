@@ -4,14 +4,4 @@
 1.万能适配器
 https://github.com/CymChad/BaseRecyclerViewAdapterHelper/wiki
 测试文本格式化相关
-Preface
-I thought I touched the laws of the world
-"tingshuo nishi luchi,xiangbudaonikydaodazheli"
-"shi jiankangdiaonaxiefaonaohetongbukuma "
-"bu ,shikyzaichongfuderizizoubutongdelu"
-"youqu,wangjizijideduding,taochujidingdemingyun"
-"kewanwanyi rangwotaochujidingdemingyun,jiushimingyundeanpaine"
-"xiangbudao nizoudaolezheli,yiranbaochizhehuaiyi,he,jinquba,zhongyulundaowoxiuxile"
-"chengrang"
 
-2077 12yue21,

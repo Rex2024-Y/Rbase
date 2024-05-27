@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import tp.xmaihh.serialport.SerialHelper
 import tp.xmaihh.serialport.bean.ComBean
 import tp.xmaihh.serialport.stick.AbsStickPackageHelper
-import java.io.IOException
+import tp.xmaihh.serialport.utils.ByteUtil
 
 
 class HardwareViewModel : BaseViewModel() {
@@ -20,22 +20,40 @@ class HardwareViewModel : BaseViewModel() {
     val mReceivedMsg: MutableLiveData<String> = MutableLiveData<String>()
     val mOpen: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
 
-    fun initSerialConfig() {
+    fun initSerialConfig(hardwareActivity: HardwareActivity) {
         //初始化SerialHelper对象，设定串口名称和波特率（此处为接收扫码数据）/dev/ttyS1
-        serialHelper = object : SerialHelper("/dev/ttyS0", 9600) {
+        serialHelper = object : SerialHelper("/dev/ttyS1", 19200) {
             override fun onDataReceived(paramComBean: ComBean) {
 
-                val time = paramComBean.sRecTime;
-                val rxText = String(paramComBean.bRec);
+                try {
+                    val time = paramComBean.sRecTime;
+                    var rxText = String(paramComBean.bRec);
 //                if (isHexType) {
 //                    //转成十六进制数据
 //                    rxText = ByteUtil.ByteArrToHex(comBean.bRec);
 //                }
-                val rText = "Rx-> $time: $rxText\r\n";
-                mReceivedMsg.postValue(rText)
-                "onDataReceived: ${Gson().toJson(paramComBean)}".logI()
+                    rxText = ByteUtil.ByteArrToHex(paramComBean.bRec);
+                    var rText = "Rx-> $time: $rxText\r\n"
+
+                    // 去掉字符串全部空格
+                    val string1 = rxText.replace(" ", "")
+                    val string2 = string1.substring(6, 14)
+                    // 16进制转10进制
+                    val num = string2.toInt(16)
+                    val des = "当前重物传感重量为:   ${num * 100.00f / 10000}  KG"
+                    rText += des
+                    mReceivedMsg.postValue(rText)
+                    "onDataReceived: ${Gson().toJson(paramComBean)}".logI()
+                } catch (e: Exception) {
+                    Toast.makeText(hardwareActivity, "onDataReceived异常：$e", Toast.LENGTH_SHORT)
+                        .show();
+                }
+
+
             }
+
         }
+
 
         /*
          * 默认的BaseStickPackageHelper将接收的数据扩展成64位，一般用不到这么多位
@@ -53,7 +71,9 @@ class HardwareViewModel : BaseViewModel() {
                 } else {
                     SystemClock.sleep(50)
                 }
-            } catch (e: IOException) {
+            } catch (e: Exception) {
+                Toast.makeText(hardwareActivity, "AbsStickPackageHelper异常：$e", Toast.LENGTH_SHORT)
+                    .show();
                 "AbsStickPackageHelper: $e".logE()
             }
             null
@@ -104,7 +124,11 @@ class HardwareViewModel : BaseViewModel() {
 
         serialHelper?.run {
             if (isOpen) {
-                sendTxt(text)
+                try {
+                    sendHex(text.replace(" ", ""))
+                } catch (e: Exception) {
+                    Toast.makeText(activity, "sendMsg异常：$e", Toast.LENGTH_SHORT).show();
+                }
             }
         } ?: let {
             Toast.makeText(activity, "请先初始化串口", Toast.LENGTH_SHORT).show();

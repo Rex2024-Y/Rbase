@@ -4,7 +4,6 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.zg.quickbase.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityHardWareBinding
-import com.zg.quickbase.databinding.ActivityHttpBinding
 
 /**
  * 展示硬件通信相关的demo
@@ -32,6 +31,7 @@ class HardwareActivity : BaseActivity() {
             tvSend.setOnClickListener {
                 mViewModel.sendMsg(this@HardwareActivity,etSendInfo.text.toString())
             }
+            etSendInfo.setText("01 03 07 D0 00 02 C4 86")
 
         }
 
@@ -39,7 +39,7 @@ class HardwareActivity : BaseActivity() {
 
     override fun initViewModel() {
         mViewModel = ViewModelProvider(this)[HardwareViewModel::class.java]
-        mViewModel.initSerialConfig()
+        mViewModel.initSerialConfig(this@HardwareActivity)
 
         mViewModel.mReceivedMsg.observe(this) {
             it?.run {

@@ -1,26 +1,14 @@
 package com.zg.quickbase.module.ui.function
 
 import android.annotation.SuppressLint
-import android.content.ContentValues
-import android.content.Context
-import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.net.Uri
-import android.os.Environment
-import android.provider.MediaStore
 import android.view.View
 import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.Toast
 import com.zg.quickbase.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityWebviewBinding
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
 
 
 /**

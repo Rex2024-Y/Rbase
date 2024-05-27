@@ -12,7 +12,6 @@ import com.chad.library.adapter4.viewholder.QuickViewHolder
 import com.zg.quickbase.module.ui.tabbase.TabBaseActivity
 import com.zg.quickbase.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityMainBinding
-import com.zg.quickbase.module.ui.bigdata.BigDataActivity
 import com.zg.quickbase.module.ui.bigdatanet.BigDataNetActivity
 import com.zg.quickbase.module.ui.http.HttpActivity
 import com.zg.quickbase.module.ui.bottomnav.BottomNavActivity
