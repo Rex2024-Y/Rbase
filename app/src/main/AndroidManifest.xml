@@ -22,8 +22,8 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.QuickBase"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
 
@@ -37,21 +37,25 @@
                 android:resource="@xml/filepaths" />
         </provider>
 
-        <activity
-            android:name=".module.ui.bigdata.BigDataActivity"
-            android:exported="false" />
-        <activity
-            android:name=".module.ui.http.HttpActivity"
-            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="user">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".module.ui.bigdata.BigDataActivity"
+            android:exported="false" />
+        <activity
+            android:name=".module.ui.http.HttpActivity"
+            android:exported="false" />
+
         <activity
             android:name=".module.ui.login.LoginActivity"
             android:exported="false"

@@ -17,13 +17,14 @@ object TestKt {
         println("item:$string2")
         // 16进制转10进制
         val num = string2.toInt(16)
-        println("weight:${num*100.00f/10000}")
+        println("weight:${num * 100.00f / 10000}")
 //        val num = sendMsg.replace(" ", "")
 //        println("num:${num}")
 //
 //        println("Hex:${HexToByteArr(num)}")
 
     }
+
 
     fun HexToByteArr(inHex: String): ByteArray {
         var inHex = inHex

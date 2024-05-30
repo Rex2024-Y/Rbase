@@ -1,7 +1,10 @@
 package com.zg.quickbase
 
+import android.app.ZysjSystemManager
 import android.content.Context
+import android.content.pm.ActivityInfo
 import android.os.Build
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
@@ -9,17 +12,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter4.BaseQuickAdapter
 import com.chad.library.adapter4.viewholder.QuickViewHolder
-import com.zg.quickbase.module.ui.tabbase.TabBaseActivity
 import com.zg.quickbase.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityMainBinding
 import com.zg.quickbase.module.ui.bigdatanet.BigDataNetActivity
-import com.zg.quickbase.module.ui.http.HttpActivity
 import com.zg.quickbase.module.ui.bottomnav.BottomNavActivity
 import com.zg.quickbase.module.ui.function.FunctionActivity
 import com.zg.quickbase.module.ui.function.WebViewActivity
 import com.zg.quickbase.module.ui.function.WebViewLocalActivity
 import com.zg.quickbase.module.ui.hardware.HardwareActivity
+import com.zg.quickbase.module.ui.http.HttpActivity
 import com.zg.quickbase.module.ui.login.LoginActivity
+import com.zg.quickbase.module.ui.tabbase.TabBaseActivity
 import com.zg.quickbase.module.ui.verticaltab.VerticalTabActivity
 import com.zg.quickbase.viewmodel.MainViewModel
 
@@ -28,8 +31,10 @@ class MainActivity : BaseActivity() {
 
     var mBinding: ActivityMainBinding? = null
     lateinit var mViewModel: MainViewModel
-
+    var isDefault = true
+    var manager: ZysjSystemManager? = null
     override fun getRoot(): View? {
+
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         return mBinding?.root
     }
@@ -38,6 +43,12 @@ class MainActivity : BaseActivity() {
         mViewModel = ViewModelProvider(this)[MainViewModel::class.java]
         mViewModel.run {
             mAdater.addAll(listData)
+        }
+
+        try {
+            manager = getSystemService("zysj") as ZysjSystemManager
+        }catch (e:Exception){
+            Log.i("MainActivity","e:$e")
         }
 
         "Build.VERSION.SDK_INT ${Build.VERSION.SDK_INT}".logI()
@@ -182,6 +193,19 @@ class MainActivity : BaseActivity() {
                     }
                     dialog.dismiss()
                 }
+            }
+
+            7 -> {
+                "requestedOrientation:${requestedOrientation}".logI()
+                "manager:${manager?.zYgetDeviceKernelInfo()}".logI()
+
+                if (isDefault) {
+                    manager?.zYsetScreenDirection(3)
+                } else {
+                    manager?.zYsetScreenDirection(0)
+
+                }
+                isDefault = !isDefault
             }
 
             else -> {
