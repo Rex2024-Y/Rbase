@@ -160,7 +160,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
+        <Button
             android:id="@+id/tvSend"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -173,17 +173,18 @@
             android:textColor="@android:color/white"
             android:textSize="18sp" />
 
-        <TextView
+        <Button
+            android:id="@+id/tvFuncation"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:background="@android:color/holo_blue_light"
             android:padding="8dp"
-            android:text="接收信息"
-            android:textColor="#999999"
-            android:textSize="18sp"
-            android:visibility="invisible" />
+            android:text="功能列表"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <View

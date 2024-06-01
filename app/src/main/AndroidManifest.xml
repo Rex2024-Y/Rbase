@@ -89,6 +89,12 @@
         <activity
             android:name=".module.ui.hardware.HardwareActivity"
             android:exported="false" />
+        <activity
+            android:name=".module.ui.hardware.lock.LockActivity"
+            android:exported="false" />
+        <activity
+            android:name=".module.ui.hardware.print.PrintActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -20,6 +20,8 @@ import com.zg.quickbase.module.ui.function.FunctionActivity
 import com.zg.quickbase.module.ui.function.WebViewActivity
 import com.zg.quickbase.module.ui.function.WebViewLocalActivity
 import com.zg.quickbase.module.ui.hardware.HardwareActivity
+import com.zg.quickbase.module.ui.hardware.lock.LockActivity
+import com.zg.quickbase.module.ui.hardware.print.PrintActivity
 import com.zg.quickbase.module.ui.http.HttpActivity
 import com.zg.quickbase.module.ui.login.LoginActivity
 import com.zg.quickbase.module.ui.tabbase.TabBaseActivity
@@ -172,7 +174,7 @@ class MainActivity : BaseActivity() {
             6 -> {
                 showListDialog(
 //                    , "蓝牙", "WIFI", "USB"
-                    it.text, arrayOf("串口")
+                    it.text, arrayOf("称重","打印机","锁孔板")
                 ) { dialog, which ->
                     when (which) {
                         0 -> {
@@ -180,11 +182,11 @@ class MainActivity : BaseActivity() {
                         }
 
                         1 -> {
-                            HardwareActivity::class.java.start()
+                            PrintActivity::class.java.start()
                         }
 
                         2 -> {
-                            HardwareActivity::class.java.start()
+                            LockActivity::class.java.start()
                         }
 
                         3 -> {
