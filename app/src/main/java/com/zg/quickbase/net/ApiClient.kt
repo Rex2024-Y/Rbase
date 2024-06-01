@@ -14,7 +14,7 @@ object ApiClient {
 
     var client = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor()
-            .setLevel(HttpLoggingInterceptor.Level.NONE))
+            .setLevel(HttpLoggingInterceptor.Level.BODY))
         .build()
 
     private val retrofit = Retrofit.Builder()
