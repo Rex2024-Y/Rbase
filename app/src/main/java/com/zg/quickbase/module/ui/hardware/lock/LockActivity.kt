@@ -3,10 +3,7 @@ package com.zg.quickbase.module.ui.hardware.lock
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.zg.quickbase.base.BaseActivity
-import com.zg.quickbase.databinding.ActivityHardWareBinding
 import com.zg.quickbase.databinding.ActivityLockBinding
-import com.zg.quickbase.module.ui.hardware.HardwareActivity
-import com.zg.quickbase.module.ui.hardware.print.PrintActivity
 
 /**
  * 展示硬件通信相关的demo

@@ -1,10 +1,7 @@
 package com.zg.quickbase
 
-import android.app.ZysjSystemManager
 import android.content.Context
-import android.content.pm.ActivityInfo
 import android.os.Build
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
@@ -21,6 +18,7 @@ import com.zg.quickbase.module.ui.function.WebViewActivity
 import com.zg.quickbase.module.ui.function.WebViewLocalActivity
 import com.zg.quickbase.module.ui.hardware.HardwareActivity
 import com.zg.quickbase.module.ui.hardware.lock.LockActivity
+import com.zg.quickbase.module.ui.hardware.nfc.NFCActivity
 import com.zg.quickbase.module.ui.hardware.print.PrintActivity
 import com.zg.quickbase.module.ui.http.HttpActivity
 import com.zg.quickbase.module.ui.login.LoginActivity
@@ -34,7 +32,7 @@ class MainActivity : BaseActivity() {
     var mBinding: ActivityMainBinding? = null
     lateinit var mViewModel: MainViewModel
     var isDefault = true
-    var manager: ZysjSystemManager? = null
+//    var manager: ZysjSystemManager? = null
     override fun getRoot(): View? {
 
         mBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -46,12 +44,12 @@ class MainActivity : BaseActivity() {
         mViewModel.run {
             mAdater.addAll(listData)
         }
-
-        try {
-            manager = getSystemService("zysj") as ZysjSystemManager
-        }catch (e:Exception){
-            Log.i("MainActivity","e:$e")
-        }
+//
+//        try { 指定工业平板才有的特殊横竖屏切换
+//            manager = getSystemService("zysj") as ZysjSystemManager
+//        }catch (e:Exception){
+//            Log.i("MainActivity","e:$e")
+//        }
 
         "Build.VERSION.SDK_INT ${Build.VERSION.SDK_INT}".logI()
     }
@@ -174,7 +172,7 @@ class MainActivity : BaseActivity() {
             6 -> {
                 showListDialog(
 //                    , "蓝牙", "WIFI", "USB"
-                    it.text, arrayOf("称重","打印机","锁孔板")
+                    it.text, arrayOf("称重","打印机","锁孔板","NFC")
                 ) { dialog, which ->
                     when (which) {
                         0 -> {
@@ -190,26 +188,26 @@ class MainActivity : BaseActivity() {
                         }
 
                         3 -> {
-                            HardwareActivity::class.java.start()
+                            NFCActivity::class.java.start()
                         }
+
                     }
                     dialog.dismiss()
                 }
             }
 
             7 -> {
-                "requestedOrientation:${requestedOrientation}".logI()
-                "manager:${manager?.zYgetDeviceKernelInfo()}".logI()
-
-                if (isDefault) {
-                    manager?.zYsetScreenDirection(3)
-                } else {
-                    manager?.zYsetScreenDirection(0)
-
-                }
+//                "requestedOrientation:${requestedOrientation}".logI()
+//                "manager:${manager?.zYgetDeviceKernelInfo()}".logI()
+//
+//                if (isDefault) {
+//                    manager?.zYsetScreenDirection(3)
+//                } else {
+//                    manager?.zYsetScreenDirection(0)
+//
+//                }
                 isDefault = !isDefault
             }
-
             else -> {
                 "未定义事件".toast()
             }

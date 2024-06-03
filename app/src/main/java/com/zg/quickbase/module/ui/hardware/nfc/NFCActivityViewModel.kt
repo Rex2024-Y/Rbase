@@ -1,4 +1,4 @@
-package com.zg.quickbase.module.ui.hardware.print
+package com.zg.quickbase.module.ui.hardware.nfc
 
 import android.app.Activity
 import android.os.SystemClock
@@ -13,13 +13,13 @@ import tp.xmaihh.serialport.bean.ComBean
 import tp.xmaihh.serialport.stick.AbsStickPackageHelper
 
 
-class PrintViewModel : BaseViewModel() {
+class NFCActivityViewModel : BaseViewModel() {
 
     private var serialHelper: SerialHelper? = null
     val mReceivedMsg: MutableLiveData<String> = MutableLiveData<String>()
     val mOpen: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
 
-    fun initSerialConfig(hardwareActivity: PrintActivity) {
+    fun initSerialConfig(hardwareActivity: NFCActivity) {
         //初始化SerialHelper对象，设定串口名称和波特率（此处为接收扫码数据）/dev/ttyS1
         serialHelper = object : SerialHelper("/dev/ttyS1", 115200) {
             override fun onDataReceived(paramComBean: ComBean) {
@@ -110,7 +110,7 @@ class PrintViewModel : BaseViewModel() {
 
     }
 
-    fun sendMsg(activity: PrintActivity, text: String) {
+    fun sendMsg(activity: NFCActivity, text: String) {
         "sendMsg $text".logI()
 
         serialHelper?.run {
