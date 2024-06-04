@@ -113,6 +113,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".module.ui.hardware.temperature.TempActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -30,9 +30,10 @@ class NFCActivity : BaseActivity() {
             tvOpen.setOnClickListener {
                 openNFC()
 
-                tvCheck.setOnClickListener {
-                    checkNFC()
-                }
+
+            }
+            tvCheck.setOnClickListener {
+                checkNFC()
             }
         }
     }

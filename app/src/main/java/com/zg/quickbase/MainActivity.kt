@@ -20,6 +20,7 @@ import com.zg.quickbase.module.ui.hardware.HardwareActivity
 import com.zg.quickbase.module.ui.hardware.lock.LockActivity
 import com.zg.quickbase.module.ui.hardware.nfc.NFCActivity
 import com.zg.quickbase.module.ui.hardware.print.PrintActivity
+import com.zg.quickbase.module.ui.hardware.temperature.TempActivity
 import com.zg.quickbase.module.ui.http.HttpActivity
 import com.zg.quickbase.module.ui.login.LoginActivity
 import com.zg.quickbase.module.ui.tabbase.TabBaseActivity
@@ -32,7 +33,8 @@ class MainActivity : BaseActivity() {
     var mBinding: ActivityMainBinding? = null
     lateinit var mViewModel: MainViewModel
     var isDefault = true
-//    var manager: ZysjSystemManager? = null
+
+    //    var manager: ZysjSystemManager? = null
     override fun getRoot(): View? {
 
         mBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -172,7 +174,7 @@ class MainActivity : BaseActivity() {
             6 -> {
                 showListDialog(
 //                    , "蓝牙", "WIFI", "USB"
-                    it.text, arrayOf("称重","打印机","锁孔板","NFC")
+                    it.text, arrayOf("称重", "打印机", "锁孔板", "NFC","温控器")
                 ) { dialog, which ->
                     when (which) {
                         0 -> {
@@ -189,6 +191,10 @@ class MainActivity : BaseActivity() {
 
                         3 -> {
                             NFCActivity::class.java.start()
+                        }
+
+                        4 -> {
+                            TempActivity::class.java.start()
                         }
 
                     }
@@ -208,6 +214,7 @@ class MainActivity : BaseActivity() {
 //                }
                 isDefault = !isDefault
             }
+
             else -> {
                 "未定义事件".toast()
             }

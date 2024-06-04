@@ -1,6 +1,9 @@
 package com.zg.quickbase
 
 import tp.xmaihh.serialport.utils.ByteUtil
+import java.io.IOException
+import java.util.Locale
+
 
 object TestKt {
     // main方法 可以run的方法 0103 0400 0000 00fa 33
@@ -8,21 +11,142 @@ object TestKt {
     fun main(args: Array<String>) {
         // request 01 03 07 D0 00 02 C4 86
         // 0.02
-        val sendMsg = "01 03 07 D0 00 02 C4 86"
-        val data = "0103 0400 0000 027b f2"
-//        // 去掉字符串全部空格
-        val string1 = data.replace(" ", "")
-        println("item:$string1")
-        val string2 = string1.substring(6, 14)
-        println("item:$string2")
-        // 16进制转10进制
-        val num = string2.toInt(16)
-        println("weight:${num * 100.00f / 10000}")
-//        val num = sendMsg.replace(" ", "")
-//        println("num:${num}")
-//
-//        println("Hex:${HexToByteArr(num)}")
+        val sendMsg = "01 03 00 00 00 01"
+        val sendMsg2 = "01 03 00 01 00 01"
+        val sendMsg3 = "01 06 00 14 01 40"
 
+        println("getCRC:${getCRC(sendMsg)}")
+        println("getCRC2:${getCRC(sendMsg2)}")
+        println("getCRC3:${getCRC(sendMsg3)}")
+
+        println("温度转化")
+
+//        -25.2=0XFF04 25.2=0X00FC -100.0=0XFC18 500.0=0X1388
+
+        println("hexToTemp FF04:${hexToTempString("FF04")}℃")
+        println("hexToTemp 00FC:${hexToTempString("00FC")}℃")
+        println("hexToTemp FC18:${hexToTempString("FC18")}℃")
+        println("hexToTemp 1388:${hexToTempString("1388")}℃")
+        println("tempToTemp -100℃:${tempToHexString("-100")}")
+
+//        val data = "0103 0400 0000 027b f2"
+////        // 去掉字符串全部空格
+//        val string1 = data.replace(" ", "")
+//        println("item:$string1")
+//        val string2 = string1.substring(6, 14)
+//        println("item:$string2")
+//        // 16进制转10进制
+//        val num = string2.toInt(16)
+//        println("weight:${num * 100.00f / 10000}")
+
+
+    }
+
+    private fun tempToHexString(num: String): String {
+//        val toFloat = num.toFloat()
+//        if (toFloat >= 0){
+//            return toFloat.toString()
+//        }else{
+//
+//        }
+        return ""
+    }
+
+    /**
+     * 16进制带正负转化为10进制
+     */
+    private fun hexToTempString(hex: String): Float {
+        println("")
+        println("")
+        println("--------------->$hex")
+        // 判断16进制字符串是否为正负
+        val isNegative = hex.startsWith("F")
+        // 如果是负数则转为二进制再按位取反再然后得到10进制数值并加上-号
+        if (isNegative) {
+            val num = hexToBinaryAndInvertToDecimal(hex)
+            return (-num * 100.00f / 1000)
+        } else {
+            val num = hex.toInt(16)
+            return (num * 100.00f / 1000)
+        }
+    }
+
+    fun hexToBinaryAndInvertToDecimal(hex: String): Int {
+        // 将 16 进制转换为二进制
+        val binaryString = hex.toInt(16).toString(2)
+        println("binary:$binaryString")
+        // 按位取反
+        val binaryStringInverted = binaryString.map {
+            if (it == '0') '1' else '0'
+        }.joinToString("")
+        println("binaryInverted:$binaryStringInverted")
+        val one = "0000000000000001"
+        // 两个二进制字符串相加
+        val sum = binaryStringInverted.toInt(2) + one.toInt(2)
+        println("+1:$sum")
+        return sum
+    }
+
+
+    /**
+     * MODBUS协议 CRC16校验码
+     */
+    fun getCRC(data: String): String {
+        var data = data
+        data = data.replace(" ", "")
+        val len = data.length
+        if (len % 2 != 0) {
+            return "0000"
+        }
+        val num = len / 2
+        val para = ByteArray(num)
+        for (i in 0 until num) {
+            val value = data.substring(i * 2, 2 * (i + 1)).toInt(16)
+            para[i] = value.toByte()
+        }
+        return getCRC(para)
+    }
+
+    /**
+     * 计算CRC16校验码
+     *
+     * @param bytes
+     * 字节数组
+     * @return [String] 校验码
+     * @since 1.0
+     */
+    fun getCRC(bytes: ByteArray): String {
+        // CRC寄存器全为1
+        var CRC = 0x0000ffff
+        // 多项式校验值
+        val POLYNOMIAL = 0x0000a001
+        var i: Int
+        var j: Int
+        i = 0
+        while (i < bytes.size) {
+            CRC = CRC xor (bytes[i].toInt() and 0x000000ff)
+            j = 0
+            while (j < 8) {
+                if (CRC and 0x00000001 != 0) {
+                    CRC = CRC shr 1
+                    CRC = CRC xor POLYNOMIAL
+                } else {
+                    CRC = CRC shr 1
+                }
+                j++
+            }
+            i++
+        }
+        // 结果转换为16进制
+        var result = Integer.toHexString(CRC).uppercase(Locale.getDefault())
+        if (result.length != 4) {
+            val sb = StringBuffer("0000")
+            result = sb.replace(4 - result.length, 4, result).toString()
+        }
+        //高位在前地位在后
+        //return result.substring(2, 4) + " " + result.substring(0, 2);
+        // 交换高低位，低位在前高位在后
+        return result.substring(2, 4) + " " + result.substring(0, 2)
     }
 
 
