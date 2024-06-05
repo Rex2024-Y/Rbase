@@ -14,4 +14,8 @@ object LogUtils {
     fun logE(tag: String, msg: String) {
         Log.e(tag, msg)
     }
+
+    fun log(msg: String) {
+        Log.d("debug", msg)
+    }
 }

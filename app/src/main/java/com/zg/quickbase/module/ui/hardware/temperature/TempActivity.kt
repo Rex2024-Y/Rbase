@@ -45,7 +45,7 @@ class TempActivity : BaseActivity() {
              */
             tvFuncation.setOnClickListener {
                 showListDialog(
-                    "温控器", arrayOf("柜子温度", "化霜温度", "设置温度32", "开7")
+                    "温控器", arrayOf("柜子温度", "化霜温度", "设置1℃", "设置2℃", "设置-1℃")
                 ) { dialog, which ->
                     when (which) {
                         0 -> {
@@ -57,16 +57,17 @@ class TempActivity : BaseActivity() {
                         }
 
                         2 -> {
-                            // 设置320/10度
-                            etSendInfo.setText("01 06 00 14 01 40 C9 AE")
+                            // 设置10/10 ℃ =1 ℃
+//                            etSendInfo.setText("01 06 00 14 00 0A 49 C9")
+                            etSendInfo.setText(TempUtils.setTemp("1"))
                         }
 
-
                         3 -> {
-                            etSendInfo.setText("8A 01 07 11 9D")
+                            etSendInfo.setText(TempUtils.setTemp("2"))
                         }
 
                         4 -> {
+                            etSendInfo.setText(TempUtils.setTemp("-1"))
                         }
                     }
                     mViewModel.sendMsg(this@TempActivity, etSendInfo.text.toString())

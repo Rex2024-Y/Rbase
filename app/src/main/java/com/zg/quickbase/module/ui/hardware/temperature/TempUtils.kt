@@ -1,82 +1,68 @@
-package com.zg.quickbase
+package com.zg.quickbase.module.ui.hardware.temperature
 
-import tp.xmaihh.serialport.utils.ByteUtil
-import java.io.IOException
+import com.zg.quickbase.utils.LogUtils
 import java.util.Locale
 import kotlin.math.abs
 
+object TempUtils {
 
-object TestKt {
-    // main方法 可以run的方法 0103 0400 0000 00fa 33
-    @JvmStatic
-    fun main(args: Array<String>) {
-        // request 01 03 07 D0 00 02 C4 86
-        // 0.02
-        val sendMsg = "01 03 00 00 00 01"
-        val sendMsg2 = "01 03 00 01 00 01"
-        val sendMsg3 = "01 06 00 14 01 40"
-
-        println("getCRC:${getCRC(sendMsg)}")
-        println("getCRC2:${getCRC(sendMsg2)}")
-        println("getCRC3:${getCRC(sendMsg3)}")
-
-        println("温度转化")
-
-//        -25.2=0XFF04 25.2=0X00FC -100.0=0XFC18 500.0=0X1388
-
-        println("hexToTemp FF04:${hexToTempString("FF04")}℃")
-        println("hexToTemp 00FC:${hexToTempString("00FC")}℃")
-        println("hexToTemp FC18:${hexToTempString("FC18")}℃")
-        println("hexToTemp 1388:${hexToTempString("1388")}℃")
-        println("tempToTemp 1℃:${tempToHexString("1")}")
-        println("tempToTemp 2℃:${tempToHexString("2")}")
-        println("tempToTemp -2℃:${tempToHexString("-2")}")
-        println("验证-2℃ 逆转 ffec:${hexToTempString("ffec")}℃")
-        println("CRC 01 06 00 14 00 0A:${getCRC("01 06 00 14 00 0A")}")
-
-        println("startsWith 0103:${"01030200FA3807".startsWith("0103")}")
-
-
-    }
 
     /**
-     * 整数直接转16进制负数 -1 按位取反
+     * 业务举例 设置温度封装
+     * @param 温度只支持整数（结合实际需求也可以支持小数）
+     */
+    fun setTemp(temp: String): String {
+        // 功能地址前缀
+        val header = "01 06 00 14"
+        val tempToHexString = tempToHexString(temp)
+        val start = "$header$tempToHexString"
+        LogUtils.log("start:$start")
+        val crc = getCRC(start)
+        LogUtils.log("crc:$crc")
+        val instruct = "$start $crc"
+        LogUtils.log("setTemp:$temp---------------> \ninstruct:$instruct")
+        return instruct
+    }
+
+
+    /**
+     * 整数直接转16进制负数 -1 按位取反 单位℃
      */
     private fun tempToHexString(num: String): String {
-        println("")
-        println("")
-        println("--------------->$num")
+         LogUtils.log("")
+         LogUtils.log("")
+         LogUtils.log("--------------->$num")
         val toFloat = num.toFloat()
         // 将℃转化为0.1℃
-        val toInt = (toFloat* 10).toInt()
-        if (toInt >= 0){
+        val toInt = (toFloat * 10).toInt()
+        if (toInt >= 0) {
             // int 转16进制
             return toInt.toString(16).uppercase().padStart(4, '0')
-        }else{
-            val temp = abs(toInt) -1
-            println("temp-1:${temp}(0.1温度)")
+        } else {
+            val temp = abs(toInt) - 1
+             LogUtils.log("temp-1:${temp}(0.1温度)")
             // 不足16位进进行0补全
             val tempBinary = temp.toString(2).padStart(16, '0')
-            println("binary:${tempBinary}")
+             LogUtils.log("binary:${tempBinary}")
             // 按位取反
             val binaryStringInverted = tempBinary.map {
                 if (it == '0') '1' else '0'
             }.joinToString("")
-            println("binaryInverted:${binaryStringInverted}")
+             LogUtils.log("binaryInverted:${binaryStringInverted}")
 
-            return  binaryStringInverted.toLong(2).toString(16).uppercase()
+            return binaryStringInverted.toLong(2).toString(16).uppercase()
         }
     }
 
     /**
      * 16进制带正负转化为10进制
      */
-    private fun hexToTempString(hex: String): Float {
-        println("")
-        println("")
-        println("--------------->$hex")
+    fun hexToTempString(hex: String): Float {
+         LogUtils.log("")
+         LogUtils.log("")
+         LogUtils.log("--------------->$hex")
         // 判断16进制字符串是否为正负
-        val isNegative = hex.uppercase().startsWith("F")
+        val isNegative = hex.startsWith("F")
         // 如果是负数则转为二进制再按位取反再然后得到10进制数值并加上-号
         return if (isNegative) {
             val num = hexToIntTemp(hex)
@@ -90,18 +76,18 @@ object TestKt {
     /**
      * 按位取反+1 获取负数问题
      */
-    private fun hexToIntTemp(hex: String): Int {
+    fun hexToIntTemp(hex: String): Int {
         // 将 16 进制转换为二进制
         val binaryString = hex.toInt(16).toString(2)
-        println("binary:$binaryString")
+         LogUtils.log("binary:$binaryString")
         // 按位取反
         val binaryStringInverted = binaryString.map {
             if (it == '0') '1' else '0'
         }.joinToString("")
-        println("binaryInverted:$binaryStringInverted")
+         LogUtils.log("binaryInverted:$binaryStringInverted")
         // 两个二进制字符串相加
         val sum = binaryStringInverted.toInt(2) + 1
-        println("+1:$sum")
+         LogUtils.log("+1:$sum")
         return sum
     }
 
@@ -165,28 +151,6 @@ object TestKt {
         //return result.substring(2, 4) + " " + result.substring(0, 2);
         // 交换高低位，低位在前高位在后
         return result.substring(2, 4) + " " + result.substring(0, 2)
-    }
-
-
-    fun HexToByteArr(inHex: String): ByteArray {
-        var inHex = inHex
-        var hexlen = inHex.length
-        val result: ByteArray
-        if (ByteUtil.isOdd(hexlen) == 1) {
-            ++hexlen
-            result = ByteArray(hexlen / 2)
-            inHex = "0$inHex"
-        } else {
-            result = ByteArray(hexlen / 2)
-        }
-        var j = 0
-        var i = 0
-        while (i < hexlen) {
-            result[j] = ByteUtil.HexToByte(inHex.substring(i, i + 2))
-            ++j
-            i += 2
-        }
-        return result
     }
 
 }

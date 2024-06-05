@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.zg.quickbase.base.BaseViewModel
+import com.zg.quickbase.utils.LogUtils
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import tp.xmaihh.serialport.SerialHelper
@@ -68,30 +69,30 @@ class TempViewModel : BaseViewModel() {
                     mReceivedMsg.postValue("result $time: $rxText\r\n")
                     // rxText 每两位截取字符串
                     val rxTextHex = rxText.replace(" ", "")
-//                    // 固定取第一块板子
-                    val subText = rxTextHex.substring(6, 10)
-                     rxText += "\n温度Hex: $subText"
-                     rxText += "\n温度解析: ${subText.toInt(16)/10.00f} ℃"
-//                    val firstBoardBinary = hexToBinary(firstBoardHex)
-//                    val firstBoardBinary8 = binaryPadToEightBits(firstBoardBinary.toString())
-//                    rxText += "\n 第一块板 hex:$firstBoardHex --> bin:$firstBoardBinary8"
-//                    rxText +="\n \n"
-//                    firstBoardBinary8.forEachIndexed { index, c ->
-//                        when (c) {
-//                            '1' -> {
-//                                rxText += "【 ${8-index}关 】, "
-//                            }
-//                            '0' -> {
-//                                rxText += "【 ${8-index}开 】, "
-//                            }
-//                        }
-//                    }
+                    rxText = "result $time: $rxText\r\n"
+                    LogUtils.log("rxTextHex:$rxTextHex " +
+                            "rxTextHex.startsWith ${rxTextHex.startsWith("0103")}")
+                    if (rxTextHex.startsWith("0103")) {
+                        "case1".logI()
+                        // 固定取
+                        val subText = rxTextHex.substring(6, 10)
+                        rxText += "\n温度Hex: $subText"
+                        rxText += "\n温度解析: ${TempUtils.hexToTempString(subText)} ℃"
+                    } else if (rxTextHex.startsWith("0106")) {
+                        "case2".logI()
+                        rxText += "\n写入返回无需解析"
+                    }
                     "onDataReceived Hex: $rxText".logI()
-                    var rText = "result $time: $rxText\r\n"
-                    mReceivedMsg.postValue(rText)
+                    val printText = "result $time: $rxText\r\n"
+                    mReceivedMsg.postValue(printText)
                 } catch (e: Exception) {
+                    "onDataReceived Exception: $e".logE()
                     hardwareActivity.runOnUiThread {
-                        Toast.makeText(hardwareActivity, "onDataReceived异常：$e", Toast.LENGTH_SHORT)
+                        Toast.makeText(
+                            hardwareActivity,
+                            "onDataReceived异常：$e",
+                            Toast.LENGTH_SHORT
+                        )
                             .show()
                     }
                 }
@@ -100,8 +101,6 @@ class TempViewModel : BaseViewModel() {
             }
 
         }
-
-
 
 
         /*
