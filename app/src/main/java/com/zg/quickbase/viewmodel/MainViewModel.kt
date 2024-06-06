@@ -10,7 +10,7 @@ class MainViewModel : ViewModel() {
 
     var listData = arrayListOf(
         MainRvBean("网页相关", 1),
-        MainRvBean("功能框架", 2),
+        MainRvBean("人脸识别", 2),
         MainRvBean("AI图片识别", 3),
         MainRvBean("网络框架", 4),
         MainRvBean("界面框架", 5),

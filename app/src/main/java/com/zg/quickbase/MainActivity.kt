@@ -1,6 +1,7 @@
 package com.zg.quickbase
 
 import android.content.Context
+import android.content.res.Configuration
 import android.os.Build
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,8 @@ import com.chad.library.adapter4.BaseQuickAdapter
 import com.chad.library.adapter4.viewholder.QuickViewHolder
 import com.zg.quickbase.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityMainBinding
+import com.zg.quickbase.module.ui.bigdata.camera.CameraActivity
+import com.zg.quickbase.module.ui.bigdata.camera.debug.CameraDoubleActivity
 import com.zg.quickbase.module.ui.bigdatanet.BigDataNetActivity
 import com.zg.quickbase.module.ui.bottomnav.BottomNavActivity
 import com.zg.quickbase.module.ui.function.FunctionActivity
@@ -54,6 +57,14 @@ class MainActivity : BaseActivity() {
 //        }
 
         "Build.VERSION.SDK_INT ${Build.VERSION.SDK_INT}".logI()
+
+        val configuration: Configuration = getResources().configuration //获取设备的配置信息
+        "screenWidthDp: ${configuration.screenWidthDp}".logI()
+        "screenWidthDp: ${configuration.screenWidthDp}".toast()
+
+//configuration.screenHeightDp  当前屏幕可用空间的高度，单位是dp
+//configuration.screenWidthDp   当前屏幕可用空间的宽度，单位是dp
+//configuration.densityDpi      当前设备的dpi信息
     }
 
     override fun initView() {
@@ -95,11 +106,11 @@ class MainActivity : BaseActivity() {
 
             2 -> {
                 showListDialog(
-                    it.text, arrayOf("人脸识别（本地库）", "人脸识别（云端库）", "在线识别")
+                    it.text, arrayOf("提取人脸（本地库）", "人脸识别（云端库）", "在线识别","双摄")
                 ) { dialog, which ->
                     when (which) {
                         0 -> {
-                            BigDataNetActivity::class.java.start()
+                            CameraActivity::class.java.start()
                         }
 
                         1 -> {
@@ -107,12 +118,12 @@ class MainActivity : BaseActivity() {
                         }
 
                         2 -> {
-                            BigDataNetActivity::class.java.start()
+                            "暂不支持".toast()
+//                            BigDataNetActivity::class.java.start()
                         }
 
                         3 -> {
-                            "暂不好用".toast()
-//                            BigDataActivity::class.java.start()
+                            CameraDoubleActivity::class.java.start()
                         }
                     }
                     dialog.dismiss()

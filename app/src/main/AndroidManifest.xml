@@ -116,6 +116,12 @@
         <activity
             android:name=".module.ui.hardware.temperature.TempActivity"
             android:exported="false" />
+        <activity
+            android:name=".module.ui.bigdata.camera.CameraActivity"
+            android:exported="false" />
+        <activity
+            android:name=".module.ui.bigdata.camera.debug.CameraDoubleActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
