@@ -16,6 +16,7 @@ class MainViewModel : ViewModel() {
         MainRvBean("界面框架", 5),
         MainRvBean("硬件通信", 6),
         MainRvBean("定制横竖屏", 7),
+        MainRvBean("主副屏", 8),
 
 
     )

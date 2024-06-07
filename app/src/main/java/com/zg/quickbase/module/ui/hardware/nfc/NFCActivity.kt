@@ -49,49 +49,49 @@ class NFCActivity : BaseActivity() {
         }
 
         if (nfcAdapter != null && nfcAdapter.isEnabled) {
-//             在onCreate方法中注册NFC事件处理器
-            val tagDetected = IntentFilter(NfcAdapter.ACTION_TECH_DISCOVERED);
-            val filters = arrayOf(tagDetected);
-
-            // 创建一个PendingIntent对象，以便系统可以在检测到NFC标签时通知你的应用
-            val pendingIntent = PendingIntent.getActivity(
-                this@NFCActivity,
-                0, Intent(this@NFCActivity, NFCActivity::class.java)
-                    .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0
-            );
-            // 在onResume方法中启用前台调度
-            nfcAdapter.enableForegroundDispatch(
-                this@NFCActivity,
-                pendingIntent,
-                filters,
-                null
-            )
-            "enableReaderMode".logI()
-
-            nfcAdapter.enableReaderMode(
-                this@NFCActivity, object : NfcAdapter.ReaderCallback {
-                    override fun onTagDiscovered(tag: Tag?) {
-                        tag?.run {
-                            "onTagDiscovered ID:${byteArrayToHexString(id)}".logI()
-                            "onTagDiscovered tag:${tag}".logI()
-                            mViewModel.mReceivedMsg.postValue(
-                                "onTagDiscovered:${
-                                    byteArrayToHexString(
-                                        id
-                                    )
-                                }"
-                            )
-                        }
-                    }
-                },
-                NfcAdapter.FLAG_READER_NFC_A or
-                        NfcAdapter.FLAG_READER_NFC_B or
-                        NfcAdapter.FLAG_READER_NFC_F or
-                        NfcAdapter.FLAG_READER_NFC_V or
-                        NfcAdapter.FLAG_READER_NFC_BARCODE,
-                null
-            )
-            "打开成功".toast()
+////             在onCreate方法中注册NFC事件处理器
+//            val tagDetected = IntentFilter(NfcAdapter.ACTION_TECH_DISCOVERED);
+//            val filters = arrayOf(tagDetected);
+//
+//            // 创建一个PendingIntent对象，以便系统可以在检测到NFC标签时通知你的应用
+//            val pendingIntent = PendingIntent.getActivity(
+//                this@NFCActivity,
+//                0, Intent(this@NFCActivity, NFCActivity::class.java)
+//                    .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0
+//            );
+//            // 在onResume方法中启用前台调度
+//            nfcAdapter.enableForegroundDispatch(
+//                this@NFCActivity,
+//                pendingIntent,
+//                filters,
+//                null
+//            )
+//            "enableReaderMode".logI()
+//
+//            nfcAdapter.enableReaderMode(
+//                this@NFCActivity, object : NfcAdapter.ReaderCallback {
+//                    override fun onTagDiscovered(tag: Tag?) {
+//                        tag?.run {
+//                            "onTagDiscovered ID:${byteArrayToHexString(id)}".logI()
+//                            "onTagDiscovered tag:${tag}".logI()
+//                            mViewModel.mReceivedMsg.postValue(
+//                                "onTagDiscovered:${
+//                                    byteArrayToHexString(
+//                                        id
+//                                    )
+//                                }"
+//                            )
+//                        }
+//                    }
+//                },
+//                NfcAdapter.FLAG_READER_NFC_A or
+//                        NfcAdapter.FLAG_READER_NFC_B or
+//                        NfcAdapter.FLAG_READER_NFC_F or
+//                        NfcAdapter.FLAG_READER_NFC_V or
+//                        NfcAdapter.FLAG_READER_NFC_BARCODE,
+//                null
+//            )
+//            "打开成功".toast()
         }
     }
 

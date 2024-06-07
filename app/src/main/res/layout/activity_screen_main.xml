@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_light"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="我是蓝色主屏幕"
+        android:textColor="@android:color/white"
+        android:textSize="30sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btCheckScreenSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="检测屏数量" />
+        <Button
+            android:id="@+id/btShowScreen1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="屏1" />
+
+        <Button
+            android:id="@+id/btShowScreen2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="屏2" />
+
+        <Button
+            android:id="@+id/btShowScreen3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="屏3拍照预览" />
+    </LinearLayout>
+</RelativeLayout>

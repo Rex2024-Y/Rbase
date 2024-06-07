@@ -27,7 +27,7 @@ import com.zg.quickbase.module.ui.hardware.temperature.TempActivity
 import com.zg.quickbase.module.ui.http.HttpActivity
 import com.zg.quickbase.module.ui.login.LoginActivity
 import com.zg.quickbase.module.ui.tabbase.TabBaseActivity
-import com.zg.quickbase.module.ui.verticaltab.VerticalTabActivity
+import com.zg.quickbase.module.ui.screen.ScreenMainActivity
 import com.zg.quickbase.viewmodel.MainViewModel
 
 
@@ -175,7 +175,7 @@ class MainActivity : BaseActivity() {
                         }
 
                         3 -> {
-                            VerticalTabActivity::class.java.start()
+                            ScreenMainActivity::class.java.start()
                         }
                     }
                     dialog.dismiss()
@@ -224,6 +224,9 @@ class MainActivity : BaseActivity() {
 //
 //                }
                 isDefault = !isDefault
+            }
+            8 -> {
+                ScreenMainActivity::class.java.start()
             }
 
             else -> {

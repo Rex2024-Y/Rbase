@@ -122,6 +122,9 @@
         <activity
             android:name=".module.ui.bigdata.camera.debug.CameraDoubleActivity"
             android:exported="false" />
+        <activity
+            android:name=".module.ui.screen.ScreenMainActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
