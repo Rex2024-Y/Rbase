@@ -221,14 +221,19 @@ class ScreenMainActivity : BaseActivity(), FaceDetectorHelper.DetectorListener {
     private fun startFaceDetector() {
         // Create the FaceDetectionHelper that will handle the inference
         backgroundExecutor.execute {
-            faceDetectorHelper =
-                FaceDetectorHelper(
-                    context = this,
-                    threshold = currentThreshold,
-                    currentDelegate = currentDelegate,
-                    faceDetectorListener = this,
-                    runningMode = RunningMode.LIVE_STREAM
-                )
+            try {
+                faceDetectorHelper =
+                    FaceDetectorHelper(
+                        context = this,
+                        threshold = currentThreshold,
+                        currentDelegate = currentDelegate,
+                        faceDetectorListener = this,
+                        runningMode = RunningMode.LIVE_STREAM
+                    )
+            } catch (e: Throwable) {
+                "当前系统不支持自带libmediapipe_tasks_vision_jni.so".toast()
+            }
+
 
             // Wait for the views to be properly laid out
             mScreen3?.previewView?.post {
@@ -291,8 +296,6 @@ class ScreenMainActivity : BaseActivity(), FaceDetectorHelper.DetectorListener {
                     .build()
 
                 "cameraInfo:${tip}".logI()
-                "$tip".toast()
-
                 cameraProvider.unbindAll()
                 cameraProvider.unbindAll()
 
