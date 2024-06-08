@@ -11,12 +11,15 @@ import androidx.camera.core.CameraSelector;
 import androidx.camera.view.PreviewView;
 
 import com.zg.quickbase.R;
+import com.zhige.checkstand_app.view.OverlayView;
 
 public class Screen3 extends Presentation {
     // 请求权限相关
 
 
     public ScreenMainActivity parentActivity;
+    public PreviewView previewView;
+    public OverlayView overlay;
 
 
     public Screen3(Context outerContext, Display display) {
@@ -34,7 +37,12 @@ public class Screen3 extends Presentation {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.presentation_screen3);
-        PreviewView previewView = findViewById(R.id.previewView);
-        ScreenMainActivity.Companion.dispatchCamera(previewView, parentActivity);
+        previewView = findViewById(R.id.previewView);
+        overlay = findViewById(R.id.overlay);
+        parentActivity.dispatchCamera();
+    }
+
+    public void switchCamera() {
+        parentActivity.dispatchCamera();
     }
 }
