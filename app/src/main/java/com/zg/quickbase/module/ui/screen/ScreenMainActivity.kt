@@ -22,9 +22,11 @@ import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
 import com.google.mediapipe.tasks.vision.core.RunningMode
+import com.zg.quickbase.XApplication
 import com.zg.quickbase.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityScreenMainBinding
 import com.zg.quickbase.module.ui.bigdata.camera.FaceDetectorHelper
+import com.zg.quickbase.module.ui.function.ErrMsgActivity
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
@@ -112,6 +114,17 @@ class ScreenMainActivity : BaseActivity(), FaceDetectorHelper.DetectorListener {
                 cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
             }
             mScreen3?.switchCamera()
+        }
+
+        XApplication.onErrListener = object : XApplication.OnErrListener {
+            override fun onErr(msg: String?) {
+                binding.tvCheckResult.text = "出现未捕获异常：$msg"
+            }
+        }
+
+        binding.btViewErr.setOnClickListener {
+            finish()
+            ErrMsgActivity::class.java.start()
         }
 
     }
@@ -221,20 +234,27 @@ class ScreenMainActivity : BaseActivity(), FaceDetectorHelper.DetectorListener {
     private fun startFaceDetector() {
         // Create the FaceDetectionHelper that will handle the inference
         backgroundExecutor.execute {
-            try {
-                faceDetectorHelper =
-                    FaceDetectorHelper(
-                        context = this,
-                        threshold = currentThreshold,
-                        currentDelegate = currentDelegate,
-                        faceDetectorListener = this,
-                        runningMode = RunningMode.LIVE_STREAM
-                    )
-            } catch (e: Throwable) {
-                "当前系统不支持自带libmediapipe_tasks_vision_jni.so".toast()
-            }
+//            try {
+//                faceDetectorHelper =
+//                    FaceDetectorHelper(
+//                        context = this,
+//                        threshold = currentThreshold,
+//                        currentDelegate = currentDelegate,
+//                        faceDetectorListener = this,
+//                        runningMode = RunningMode.LIVE_STREAM
+//                    )
+//            } catch (e: Throwable) {
+//                "当前系统不支持自带libmediapipe_tasks_vision_jni.so".toast()
+//            }
 
-
+            faceDetectorHelper =
+                FaceDetectorHelper(
+                    context = this,
+                    threshold = currentThreshold,
+                    currentDelegate = currentDelegate,
+                    faceDetectorListener = this,
+                    runningMode = RunningMode.LIVE_STREAM
+                )
             // Wait for the views to be properly laid out
             mScreen3?.previewView?.post {
                 startCamera()
@@ -245,11 +265,17 @@ class ScreenMainActivity : BaseActivity(), FaceDetectorHelper.DetectorListener {
 
     // 调起相机
     private fun startCamera() {
-        viewFinder?.implementationMode =
-            PreviewView.ImplementationMode.COMPATIBLE // 指定模式，以便支持旋转
-        viewFinder?.scaleType = PreviewView.ScaleType.FILL_START
-        // start
-        startCamera(cameraSelector, previewRotation)
+
+        try {
+            viewFinder?.implementationMode =
+                PreviewView.ImplementationMode.COMPATIBLE // 指定模式，以便支持旋转
+            viewFinder?.scaleType = PreviewView.ScaleType.FILL_START
+            // start
+            startCamera(cameraSelector, previewRotation)
+        } catch (e: Throwable) {
+            "startCamera:$e".toast()
+        }
+
     }
 
     @SuppressLint("RestrictedApi")
@@ -297,8 +323,6 @@ class ScreenMainActivity : BaseActivity(), FaceDetectorHelper.DetectorListener {
 
                 "cameraInfo:${tip}".logI()
                 cameraProvider.unbindAll()
-                cameraProvider.unbindAll()
-
                 cameraProvider.bindToLifecycle(
                     this,
                     selector,
