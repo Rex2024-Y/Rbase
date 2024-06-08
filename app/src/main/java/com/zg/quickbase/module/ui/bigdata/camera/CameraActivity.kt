@@ -52,9 +52,9 @@ class CameraActivity : BaseActivity(), FaceDetectorHelper.DetectorListener {
     private var photoRotationTag = 0 // 0 默认
     private var photoRotation: Int? = null
 
-    private lateinit var mViewModel: CameraViewModel
+    private var mViewModel: CameraViewModel? = null
 
-    private lateinit var faceDetectorHelper: FaceDetectorHelper
+    private var faceDetectorHelper: FaceDetectorHelper? = null
 
     // 合格分数
     private val qualifiedScore = 0.9f
@@ -94,14 +94,22 @@ class CameraActivity : BaseActivity(), FaceDetectorHelper.DetectorListener {
     private fun startFaceDetector() {
         // Create the FaceDetectionHelper that will handle the inference
         backgroundExecutor.execute {
-            faceDetectorHelper =
-                FaceDetectorHelper(
-                    context = this@CameraActivity,
-                    threshold = mViewModel.currentThreshold,
-                    currentDelegate = mViewModel.currentDelegate,
-                    faceDetectorListener = this,
-                    runningMode = RunningMode.LIVE_STREAM
-                )
+
+            try {
+                mViewModel?.run {
+                    faceDetectorHelper =
+                        FaceDetectorHelper(
+                            context = this@CameraActivity,
+                            threshold = currentThreshold,
+                            currentDelegate = currentDelegate,
+                            faceDetectorListener = this@CameraActivity,
+                            runningMode = RunningMode.LIVE_STREAM
+                        )
+                }
+            } catch (e: Throwable) {
+                "当前系统不支持自带libmediapipe_tasks_vision_jni.so".toast()
+            }
+
 
             // Wait for the views to be properly laid out
             binding.viewFinder.post {
@@ -186,7 +194,7 @@ class CameraActivity : BaseActivity(), FaceDetectorHelper.DetectorListener {
     }
 
     private fun detectLivestreamFrame(imageProxy: ImageProxy) {
-        faceDetectorHelper.detectLivestreamFrame(imageProxy, previewJxFzTag)
+        faceDetectorHelper?.detectLivestreamFrame(imageProxy, previewJxFzTag)
     }
 
     // 检测是否拥有所需权限
@@ -458,22 +466,22 @@ class CameraActivity : BaseActivity(), FaceDetectorHelper.DetectorListener {
         super.onResume()
 
         backgroundExecutor.execute {
-            if (this::faceDetectorHelper.isInitialized && faceDetectorHelper.isClosed()) {
-                faceDetectorHelper.setupFaceDetector()
+            if (faceDetectorHelper?.isClosed() == true) {
+                faceDetectorHelper?.setupFaceDetector()
             }
         }
     }
 
     override fun onPause() {
         super.onPause()
-
-        // save FaceDetector settings
-        if (this::faceDetectorHelper.isInitialized) {
-            mViewModel.setDelegate(faceDetectorHelper.currentDelegate)
-            mViewModel.setThreshold(faceDetectorHelper.threshold)
+        faceDetectorHelper?.run {
+            // save FaceDetector settings
+            mViewModel?.setDelegate(currentDelegate)
+            mViewModel?.setThreshold(threshold)
             // Close the face detector and release resources
-            backgroundExecutor.execute { faceDetectorHelper.clearFaceDetector() }
+            backgroundExecutor.execute {clearFaceDetector() }
         }
+
     }
 
     override fun onDestroy() {
