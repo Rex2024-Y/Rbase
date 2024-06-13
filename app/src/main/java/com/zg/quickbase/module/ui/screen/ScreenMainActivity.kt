@@ -134,14 +134,14 @@ class ScreenMainActivity : BaseActivity(), FaceDetectorHelper.DetectorListener {
         if (allPermissionsGranted()) {
             //displays[0] 主屏，displays[1] 副屏
             mScreen3 = Screen3(this, displays[1])
-            mScreen3?.show();
+            mScreen3?.show()
         } else {
             // 申请权限
             registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
                 if (isGranted) {
                     //displays[0] 主屏，displays[1] 副屏
                     mScreen3 = Screen3(this, displays[1])
-                    mScreen3?.show();
+                    mScreen3?.show()
                 } else {
                     Toast.makeText(this, "Permission request denied", Toast.LENGTH_SHORT)
                         .show()

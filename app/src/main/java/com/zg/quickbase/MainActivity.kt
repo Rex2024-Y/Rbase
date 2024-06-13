@@ -57,9 +57,11 @@ class MainActivity : BaseActivity() {
 //        }
 
         "Build.VERSION.SDK_INT ${Build.VERSION.SDK_INT}".logI()
-
+        // px=dp*(dpi/160)=dp*density;
         val configuration: Configuration = getResources().configuration //获取设备的配置信息
-        "screenWidthDp: ${configuration.screenWidthDp}".logI()
+        "screenWidthDp screenHeightDp: ${configuration.screenWidthDp},${configuration.screenHeightDp}".logI()
+        // 直接获取的api
+        "densityDpi: ${configuration.densityDpi}".logI()
         "screenWidthDp: ${configuration.screenWidthDp}".toast()
 
 //configuration.screenHeightDp  当前屏幕可用空间的高度，单位是dp
