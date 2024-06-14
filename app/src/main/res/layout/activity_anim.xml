@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#131217"
+    android:clipChildren="false">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom"
+        android:layout_marginBottom="-20dp"
+        android:background="@mipmap/bg_s2_wait_read_plate_top">
+
+        <ImageView
+            android:layout_width="662dp"
+            android:layout_height="453dp"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/anim_bg_price_on" />
+
+        <ImageView
+            android:id="@+id/ivStand"
+            android:layout_width="662dp"
+            android:layout_height="453dp"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/anim_plate_stand" />
+
+        <ImageView
+            android:id="@+id/ivStandCover"
+            android:layout_width="520dp"
+            android:layout_height="326dp"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/anim_plate_stand_cover" />
+
+        <ImageView
+            android:id="@+id/ivStandMove"
+            android:layout_width="662dp"
+            android:layout_height="453dp"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/anim_plate_move"
+            android:translationX="-118dp"
+            android:translationY="-92dp" />
+    </FrameLayout>
+
+
+    <TextView
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@mipmap/bg_s2_wait_read_plate"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="0dp"
+        android:paddingTop="38.5dp"
+        android:text="请放置托盘"
+        android:textColor="@color/white"
+        android:textSize="55.6dp">
+
+    </TextView>
+</RelativeLayout>

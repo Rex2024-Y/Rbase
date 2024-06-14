@@ -131,6 +131,9 @@
         <activity
             android:name=".module.ui.function.ErrMsgActivity"
             android:exported="false" />
+        <activity
+            android:name=".module.ui.anim.AnimActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

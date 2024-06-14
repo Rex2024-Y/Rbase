@@ -7,14 +7,14 @@ import android.view.Display;
 
 import com.zg.quickbase.R;
 
-public class Screen1 extends Presentation {
+public class Screen1Copy extends Presentation {
 
 
-    public Screen1(Context outerContext, Display display) {
+    public Screen1Copy(Context outerContext, Display display) {
         super(outerContext, display);
     }
 
-    public Screen1(Context outerContext, Display display, int theme) {
+    public Screen1Copy(Context outerContext, Display display, int theme) {
         super(outerContext, display, theme);
     }
 

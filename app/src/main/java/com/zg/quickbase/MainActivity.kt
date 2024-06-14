@@ -12,6 +12,7 @@ import com.chad.library.adapter4.BaseQuickAdapter
 import com.chad.library.adapter4.viewholder.QuickViewHolder
 import com.zg.quickbase.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityMainBinding
+import com.zg.quickbase.module.ui.anim.AnimActivity
 import com.zg.quickbase.module.ui.bigdata.camera.CameraActivity
 import com.zg.quickbase.module.ui.bigdata.camera.debug.CameraDoubleActivity
 import com.zg.quickbase.module.ui.bigdatanet.BigDataNetActivity
@@ -108,7 +109,7 @@ class MainActivity : BaseActivity() {
 
             2 -> {
                 showListDialog(
-                    it.text, arrayOf("提取人脸（本地库）", "人脸识别（云端库）", "在线识别","双摄")
+                    it.text, arrayOf("提取人脸（本地库）", "人脸识别（云端库）", "在线识别", "双摄")
                 ) { dialog, which ->
                     when (which) {
                         0 -> {
@@ -161,7 +162,7 @@ class MainActivity : BaseActivity() {
 
             5 -> {
                 showListDialog(
-                    it.text, arrayOf("Login", "Tab", "Nav", "VTab")
+                    it.text, arrayOf("Login", "Tab", "Nav", "VTab", "Animal")
                 ) { dialog, which ->
                     when (which) {
                         0 -> {
@@ -179,6 +180,10 @@ class MainActivity : BaseActivity() {
                         3 -> {
                             ScreenMainActivity::class.java.start()
                         }
+
+                        4 -> {
+                            AnimActivity::class.java.start()
+                        }
                     }
                     dialog.dismiss()
                 }
@@ -187,7 +192,7 @@ class MainActivity : BaseActivity() {
             6 -> {
                 showListDialog(
 //                    , "蓝牙", "WIFI", "USB"
-                    it.text, arrayOf("称重", "打印机", "锁孔板", "NFC","温控器")
+                    it.text, arrayOf("称重", "打印机", "锁孔板", "NFC", "温控器")
                 ) { dialog, which ->
                     when (which) {
                         0 -> {
@@ -227,6 +232,7 @@ class MainActivity : BaseActivity() {
 //                }
                 isDefault = !isDefault
             }
+
             8 -> {
                 ScreenMainActivity::class.java.start()
             }
