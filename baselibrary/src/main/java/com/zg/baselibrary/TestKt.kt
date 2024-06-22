@@ -1,7 +1,5 @@
-package com.zg.quickbase
+package com.zg.baselibrary
 
-import tp.xmaihh.serialport.utils.ByteUtil
-import java.io.IOException
 import java.util.Locale
 import kotlin.math.abs
 
@@ -31,6 +29,7 @@ object TestKt {
         println("tempToTemp 1℃:${tempToHexString("1")}")
         println("tempToTemp 2℃:${tempToHexString("2")}")
         println("tempToTemp -2℃:${tempToHexString("-2")}")
+        println("tempToTemp2 -2℃:${tempToHexString2("-2")}")
         println("验证-2℃ 逆转 ffec:${hexToTempString("ffec")}℃")
         println("CRC 01 06 00 14 00 0A:${getCRC("01 06 00 14 00 0A")}")
 
@@ -48,12 +47,12 @@ object TestKt {
         println("--------------->$num")
         val toFloat = num.toFloat()
         // 将℃转化为0.1℃
-        val toInt = (toFloat* 10).toInt()
-        if (toInt >= 0){
+        val toInt = (toFloat * 10).toInt()
+        if (toInt >= 0) {
             // int 转16进制
             return toInt.toString(16).uppercase().padStart(4, '0')
-        }else{
-            val temp = abs(toInt) -1
+        } else {
+            val temp = abs(toInt) - 1
             println("temp-1:${temp}(0.1温度)")
             // 不足16位进进行0补全
             val tempBinary = temp.toString(2).padStart(16, '0')
@@ -63,8 +62,9 @@ object TestKt {
                 if (it == '0') '1' else '0'
             }.joinToString("")
             println("binaryInverted:${binaryStringInverted}")
+            println("方法2:${tempToHex(toInt)}")
 
-            return  binaryStringInverted.toLong(2).toString(16).uppercase()
+            return binaryStringInverted.toLong(2).toString(16).uppercase()
         }
     }
 
@@ -80,12 +80,62 @@ object TestKt {
         // 如果是负数则转为二进制再按位取反再然后得到10进制数值并加上-号
         return if (isNegative) {
             val num = hexToIntTemp(hex)
+            val num2 = hexToIntTemp2(hex)
             (-num * 100.00f / 1000)
         } else {
             val num = hex.toInt(16)
             (num * 100.00f / 1000)
         }
     }
+
+    private fun hexToIntTemp2(hex: String): Int {
+        // 将 16 进制转换为二进制
+        val intNum = hex.toInt(16)
+        val value = (intNum.inv() and 0xFFFF) + 1
+        val sum = abs(value)
+        println("hexToIntTemp2:$sum")
+        return sum
+    }
+
+
+    /**
+     * 整数直接转16进制负数 -1 按位取反
+     */
+    private fun tempToHexString2(num: String): String {
+        println("")
+        println("")
+        println("--------------->$num")
+        val toFloat = num.toFloat()
+        // 将℃转化为0.1℃
+        val toInt = (toFloat * 10).toInt()
+        if (toInt >= 0) {
+            // int 转16进制
+            return toInt.toString(16).uppercase().padStart(4, '0')
+        } else {
+            val temp = abs(toInt) - 1
+            println("tempToHex2 temp-1:${temp}(0.1温度)")
+            // 不足16位进进行0补全
+            val value = (temp.inv() and 0xFFFF)
+            println("tempToHex2 value:${value}")
+            return value.toString(16).uppercase()
+        }
+    }
+
+
+    /**
+     * @param 温度
+     * 负数转16进制
+     */
+    private fun tempToHex(toInt: Int): String {
+        val temp = abs(toInt) - 1
+        println("tempToHex2 temp-1:${temp}(0.1温度)")
+        // 不足16位进进行0补全
+        val value = (temp.inv() and 0xFFFF)
+        println("tempToHex2 value:${value}")
+        return value.toString(16).uppercase()
+    }
+
+
 
     /**
      * 按位取反+1 获取负数问题
@@ -168,25 +218,25 @@ object TestKt {
     }
 
 
-    fun HexToByteArr(inHex: String): ByteArray {
-        var inHex = inHex
-        var hexlen = inHex.length
-        val result: ByteArray
-        if (ByteUtil.isOdd(hexlen) == 1) {
-            ++hexlen
-            result = ByteArray(hexlen / 2)
-            inHex = "0$inHex"
-        } else {
-            result = ByteArray(hexlen / 2)
-        }
-        var j = 0
-        var i = 0
-        while (i < hexlen) {
-            result[j] = ByteUtil.HexToByte(inHex.substring(i, i + 2))
-            ++j
-            i += 2
-        }
-        return result
-    }
+//    fun HexToByteArr(inHex: String): ByteArray {
+//        var inHex = inHex
+//        var hexlen = inHex.length
+//        val result: ByteArray
+//        if (ByteUtil.isOdd(hexlen) == 1) {
+//            ++hexlen
+//            result = ByteArray(hexlen / 2)
+//            inHex = "0$inHex"
+//        } else {
+//            result = ByteArray(hexlen / 2)
+//        }
+//        var j = 0
+//        var i = 0
+//        while (i < hexlen) {
+//            result[j] = ByteUtil.HexToByte(inHex.substring(i, i + 2))
+//            ++j
+//            i += 2
+//        }
+//        return result
+//    }
 
 }

@@ -2,12 +2,13 @@ package com.zg.quickbase
 
 import android.app.Application
 import android.util.Log
-import android.widget.Toast
+import com.zg.baselibrary.ContextManager
 import java.util.Date
 
 class XApplication : Application() {
     override fun onCreate() {
         super.onCreate()
+        ContextManager.instance.init(this)
         Thread.setDefaultUncaughtExceptionHandler(MyUncaughtExceptionHandler())
     }
 

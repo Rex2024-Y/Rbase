@@ -17,6 +17,7 @@ https://blog.csdn.net/huweiliyi/article/details/105895759?spm=1001.2101.3001.665
 | mmkv                          | 内核还是shareprefrence   | https://github.com/Tencent/MMKV                                                     |
 | Presentation                  | 内核还是特殊dialog         | https://developer.android.com/reference/android/app/Presentation                    |
 | BaseRecyclerViewAdapterHelper | RecyclerView的快速开发适配器 | https://github.com/CymChad/BaseRecyclerViewAdapterHelper/wiki                       |
+| GeckoView                     | 火狐浏览器内核              | https://wiki.mozilla.org/Mobile/GeckoView                                           |
 
 ### 工具类
 日志工具类 LogUtils  统一管理log  BaseActivity和BaseFragment下可以 String.LogI() 直接调用
@@ -38,3 +39,8 @@ put get 使用简单
 ### 万能适配器
 用于各种列表 表格 tab均可代替
 https://github.com/CymChad/BaseRecyclerViewAdapterHelper/wiki
+
+
+### 火狐浏览器内核
+解决部分机器webview不兼容的问题
+https://wiki.mozilla.org/Mobile/GeckoView
