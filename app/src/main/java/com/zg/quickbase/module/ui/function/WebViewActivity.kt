@@ -7,7 +7,7 @@ import android.webkit.WebSettings
 import android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import com.zg.quickbase.base.BaseActivity
+import com.zg.baselibrary.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityWebviewBinding
 
 
@@ -17,7 +17,7 @@ class WebViewActivity : BaseActivity() {
 
     private lateinit var binding: ActivityWebviewBinding
     var mUrl = "https://blog.csdn.net/weixin_48618536/article/details/121699741"
-
+    // https://www.ghxi.com/llq 浏览器内核测试网址
     override fun getRoot(): View {
         binding = ActivityWebviewBinding.inflate(layoutInflater)
         return binding.root

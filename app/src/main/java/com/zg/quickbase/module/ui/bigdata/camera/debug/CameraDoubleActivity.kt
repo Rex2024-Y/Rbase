@@ -6,7 +6,7 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.PermissionChecker
 import androidx.lifecycle.ViewModelProvider
-import com.zg.quickbase.base.BaseActivity
+import com.zg.baselibrary.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityCameraDoubleBinding
 import com.zg.quickbase.module.ui.bigdata.camera.CameraViewModel
 import java.lang.Exception

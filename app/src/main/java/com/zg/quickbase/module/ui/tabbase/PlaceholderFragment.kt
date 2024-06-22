@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
-import com.zg.quickbase.base.BaseFragment
+import com.zg.baselibrary.base.BaseFragment
 import com.zg.quickbase.databinding.FragmentTabBaseBinding
 
 /**

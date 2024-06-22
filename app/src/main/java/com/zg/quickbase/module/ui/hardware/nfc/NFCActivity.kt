@@ -1,15 +1,13 @@
 package com.zg.quickbase.module.ui.hardware.nfc
 
-import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.nfc.NfcAdapter
 import android.nfc.NfcManager
 import android.nfc.Tag
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import com.zg.quickbase.base.BaseActivity
+import com.zg.baselibrary.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityNfcBinding
 
 /**

@@ -10,7 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.zg.quickbase.base.BaseActivity
+import com.zg.baselibrary.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityBigDataNetBinding
 
 

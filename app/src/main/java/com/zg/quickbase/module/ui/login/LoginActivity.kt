@@ -10,8 +10,8 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.Toast
+import com.zg.baselibrary.base.BaseActivity
 import com.zg.quickbase.R
-import com.zg.quickbase.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityLoginBinding
 
 class LoginActivity : BaseActivity() {

@@ -7,8 +7,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener
+import com.zg.baselibrary.base.BaseActivity
 import com.zg.quickbase.R
-import com.zg.quickbase.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityBottomNavBinding
 import com.zg.quickbase.module.ui.bottomnav.ui.dashboard.DashboardFragment
 import com.zg.quickbase.module.ui.bottomnav.ui.home.HomeFragment

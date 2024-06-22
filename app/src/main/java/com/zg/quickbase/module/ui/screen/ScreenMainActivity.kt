@@ -22,8 +22,8 @@ import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
 import com.google.mediapipe.tasks.vision.core.RunningMode
+import com.zg.baselibrary.base.BaseActivity
 import com.zg.quickbase.XApplication
-import com.zg.quickbase.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityScreenMainBinding
 import com.zg.quickbase.module.ui.bigdata.camera.FaceDetectorHelper
 import com.zg.quickbase.module.ui.function.ErrMsgActivity

@@ -2,7 +2,7 @@ package com.zg.quickbase.module.ui.http
 
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import com.zg.quickbase.base.BaseActivity
+import com.zg.baselibrary.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityHttpBinding
 
 /**

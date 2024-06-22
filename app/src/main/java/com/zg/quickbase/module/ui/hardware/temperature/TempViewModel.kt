@@ -5,7 +5,7 @@ import android.os.SystemClock
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
-import com.zg.quickbase.base.BaseViewModel
+import com.zg.baselibrary.base.BaseViewModel
 import com.zg.quickbase.utils.LogUtils
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

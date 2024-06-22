@@ -24,7 +24,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
 import androidx.lifecycle.ViewModelProvider
 import com.google.mediapipe.tasks.vision.core.RunningMode
-import com.zg.quickbase.base.BaseActivity
+import com.zg.baselibrary.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityCameraBinding
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors

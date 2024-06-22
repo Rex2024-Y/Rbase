@@ -2,8 +2,7 @@ package com.zg.quickbase.module.ui.hardware.temperature
 
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import com.zg.quickbase.base.BaseActivity
-import com.zg.quickbase.databinding.ActivityLockBinding
+import com.zg.baselibrary.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityTempBinding
 
 /**

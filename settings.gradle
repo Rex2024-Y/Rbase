@@ -27,3 +27,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "QuickBase"
 include ':app'
+include ':baselibrary'

@@ -6,10 +6,8 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.view.View
 import android.view.animation.AccelerateInterpolator
-import android.view.animation.LinearInterpolator
-import com.zg.quickbase.base.BaseActivity
+import com.zg.baselibrary.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityAnimBinding
-import com.zg.quickbase.databinding.ActivityHttpBinding
 
 /**
  * 展示两个网络请求demo

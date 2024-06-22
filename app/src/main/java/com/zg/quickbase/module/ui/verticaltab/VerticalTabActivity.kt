@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.chad.library.adapter4.BaseQuickAdapter
 import com.chad.library.adapter4.viewholder.QuickViewHolder
+import com.zg.baselibrary.base.BaseActivity
 import com.zg.quickbase.R
-import com.zg.quickbase.base.BaseActivity
 import com.zg.quickbase.databinding.ActivityLeftTabBinding
 import com.zg.quickbase.module.ui.bottomnav.ui.dashboard.DashboardFragment
 import com.zg.quickbase.module.ui.bottomnav.ui.home.HomeFragment

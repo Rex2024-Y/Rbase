@@ -3,7 +3,7 @@ package com.zg.quickbase.module.ui.function
 import android.app.Activity
 import android.os.Environment
 import androidx.lifecycle.MutableLiveData
-import com.zg.quickbase.base.BaseViewModel
+import com.zg.baselibrary.base.BaseViewModel
 import com.zg.quickbase.net.ApiClient
 import com.zg.quickbase.utils.DateUtils
 import kotlinx.coroutines.GlobalScope

@@ -1,12 +1,10 @@
 package com.zg.quickbase.module.ui.http
 
 import androidx.lifecycle.MutableLiveData
-import com.zg.quickbase.base.BaseViewModel
+import com.zg.baselibrary.base.BaseViewModel
 import com.zg.quickbase.bean.HttpResult
 import com.zg.quickbase.net.ApiClient
 import com.zg.quickbase.request.LoginParam
-import okhttp3.ResponseBody
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
 
