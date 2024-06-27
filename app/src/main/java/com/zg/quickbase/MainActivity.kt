@@ -24,6 +24,7 @@ import com.zg.quickbase.module.ui.hardware.HardwareActivity
 import com.zg.quickbase.module.ui.hardware.lock.LockActivity
 import com.zg.quickbase.module.ui.hardware.nfc.NFCActivity
 import com.zg.quickbase.module.ui.hardware.print.PrintActivity
+import com.zg.quickbase.module.ui.hardware.scancode.ScanCodeActivity
 import com.zg.quickbase.module.ui.hardware.temperature.TempActivity
 import com.zg.quickbase.module.ui.http.HttpActivity
 import com.zg.quickbase.module.ui.login.LoginActivity
@@ -192,7 +193,7 @@ class MainActivity : BaseActivity() {
             6 -> {
                 showListDialog(
 //                    , "蓝牙", "WIFI", "USB"
-                    it.text, arrayOf("称重", "打印机", "锁孔板", "NFC", "温控器")
+                    it.text, arrayOf("称重", "打印机", "锁孔板", "NFC", "温控器", "扫码枪")
                 ) { dialog, which ->
                     when (which) {
                         0 -> {
@@ -214,6 +215,11 @@ class MainActivity : BaseActivity() {
                         4 -> {
                             TempActivity::class.java.start()
                         }
+
+                        5 -> {
+                            ScanCodeActivity::class.java.start()
+                        }
+
 
                     }
                     dialog.dismiss()

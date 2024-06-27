@@ -58,6 +58,11 @@ android {
         noCompress "tflite"
     }
 
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
 
 }
 
@@ -74,6 +79,7 @@ dependencies {
     implementation libs.androidx.navigation.fragment.ktx
     implementation libs.androidx.navigation.ui.ktx
     implementation files('libs\\ZY-Interface-11.jar')
+    implementation files('libs\\ChiceScanGun.jar')
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core

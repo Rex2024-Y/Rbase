@@ -82,7 +82,7 @@ class ScreenMainActivity : BaseActivity(), FaceDetectorHelper.DetectorListener {
                 hideAll()
                 //displays[0] 主屏，displays[1] 副屏
                 mScreen2 = Screen2(this, mDisplays[1]);
-                mScreen2?.show();
+                mScreen2?.show()
             } else {
                 "当前屏幕数量为1 不支持".toast()
             }

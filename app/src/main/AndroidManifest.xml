@@ -134,6 +134,9 @@
         <activity
             android:name=".module.ui.anim.AnimActivity"
             android:exported="false" />
+        <activity
+            android:name=".module.ui.hardware.scancode.ScanCodeActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
