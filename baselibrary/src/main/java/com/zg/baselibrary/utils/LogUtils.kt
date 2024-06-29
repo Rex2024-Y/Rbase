@@ -5,6 +5,12 @@ import android.util.Log
 object LogUtils {
     // 快速过滤所有主动打印的log
     const val BASE_TAG = "base-"
+
+
+    fun log(msg: String) {
+        logD("NONE", msg)
+    }
+
     fun logD(tag: String, msg: String) {
         Log.d(BASE_TAG + tag, msg)
     }

@@ -14,29 +14,42 @@ object TestKt {
         val sendMsg2 = "01 03 00 01 00 01"
         val sendMsg3 = "01 06 00 14 01 40"
 
-        println("getCRC:${getCRC(sendMsg)}")
-        println("getCRC2:${getCRC(sendMsg2)}")
-        println("getCRC3:${getCRC(sendMsg3)}")
+        // 电子秤01 03 07 D0 00 02 C4 86
+        // 电子秤03 03 07 D0 00 02 C5 64
+//        01 03 07 D0 00 02 C4 86
+        println("电子秤:${getCRC("01 03 07 D0 00 02")}")
+        println("电子秤03:${getCRC("03 03 07 D0 00 02")}")
+//        01 03 00 00 00 01 84 0A
+        println("温控器01:${getCRC("01 03 00 00 00 01")}")
+        println("温控器02:${getCRC("02 03 00 00 00 01")}")
+//        println("getCRC2:${getCRC(sendMsg2)}")
+//        println("getCRC3:${getCRC(sendMsg3)}")
 
-        println("温度转化")
+//        println("温度转化")
 
 //        -25.2=0XFF04 25.2=0X00FC -100.0=0XFC18 500.0=0X1388
 
-        println("hexToTemp FF04:${hexToTempString("FF04")}℃")
-        println("hexToTemp 00FC:${hexToTempString("00FC")}℃")
-        println("hexToTemp FC18:${hexToTempString("FC18")}℃")
-        println("hexToTemp 1388:${hexToTempString("1388")}℃")
-        println("tempToTemp 1℃:${tempToHexString("1")}")
-        println("tempToTemp 2℃:${tempToHexString("2")}")
-        println("tempToTemp -2℃:${tempToHexString("-2")}")
-        println("tempToTemp2 -2℃:${tempToHexString2("-2")}")
-        println("验证-2℃ 逆转 ffec:${hexToTempString("ffec")}℃")
-        println("CRC 01 06 00 14 00 0A:${getCRC("01 06 00 14 00 0A")}")
-
-        println("startsWith 0103:${"01030200FA3807".startsWith("0103")}")
+//        println("hexToTemp FF04:${hexToTempString("FF04")}℃")
+//        println("hexToTemp 00FC:${hexToTempString("00FC")}℃")
+//        println("hexToTemp FC18:${hexToTempString("FC18")}℃")
+//        println("hexToTemp 1388:${hexToTempString("1388")}℃")
+//        println("tempToTemp 1℃:${tempToHexString("1")}")
+//        println("tempToTemp 2℃:${tempToHexString("2")}")
+//        println("tempToTemp -2℃:${tempToHexString("-2")}")
+//        println("tempToTemp2 -2℃:${tempToHexString2("-2")}")
+//        println("验证-2℃ 逆转 ffec:${hexToTempString("ffec")}℃")
+//        println("CRC 01 06 00 14 00 0A:${getCRC("01 06 00 14 00 0A")}")
+//
+//        println("startsWith 0103:${"01030200FA3807".startsWith("0103")}")
 
 
     }
+
+    fun asciiToString(ascii: Int): String {
+        return Char(ascii).toString()
+    }
+
+
 
     /**
      * 整数直接转16进制负数 -1 按位取反
