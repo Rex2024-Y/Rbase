@@ -22,6 +22,10 @@ object TestKt {
 //        01 03 00 00 00 01 84 0A
         println("温控器01:${getCRC("01 03 00 00 00 01")}")
         println("温控器02:${getCRC("02 03 00 00 00 01")}")
+        println("锁孔板:${getBCC("80 01 00 33")}")
+        println("锁孔板:${getBCC("8A 01 00 11")}")
+
+
 //        println("getCRC2:${getCRC(sendMsg2)}")
 //        println("getCRC3:${getCRC(sendMsg3)}")
 
@@ -45,10 +49,50 @@ object TestKt {
 
     }
 
+
+    /**
+     * 数据校验 异或处理
+     */
+    private fun getBCC(hex: String): String {
+
+        val content = hex.replace(" ", "")
+        var a = 0
+        for (i in 0 until content.length / 2) {
+            a = a xor content.substring(i * 2, i * 2 + 2).toInt(16)
+        }
+        val result = Integer.toHexString(a)
+        return if (result.length == 1) {
+            "0$result".uppercase(Locale.getDefault())
+        } else {
+            result.uppercase(Locale.getDefault())
+        }
+    }
+
+    private fun xorHexBytes(hexString: String): Byte {
+        val bytes = hexStringToByteArray(hexString)
+        var bcc: Byte = 0
+        for (b in bytes) {
+            bcc = (bcc.toInt() xor b.toInt()).toByte()
+        }
+        return bcc
+    }
+
+    private fun hexStringToByteArray(hexString: String): ByteArray {
+        val len = hexString.length
+        val data = ByteArray(len / 2)
+        var i = 0
+        while (i < len) {
+            data[i / 2] = ((hexString[i].digitToIntOrNull(16)
+                ?: (-1 shl 4)) + hexString[i + 1].digitToIntOrNull(16)!!).toByte()
+            i += 2
+        }
+        return data
+    }
+
+
     fun asciiToString(ascii: Int): String {
         return Char(ascii).toString()
     }
-
 
 
     /**
@@ -112,30 +156,6 @@ object TestKt {
 
 
     /**
-     * 整数直接转16进制负数 -1 按位取反
-     */
-    private fun tempToHexString2(num: String): String {
-        println("")
-        println("")
-        println("--------------->$num")
-        val toFloat = num.toFloat()
-        // 将℃转化为0.1℃
-        val toInt = (toFloat * 10).toInt()
-        if (toInt >= 0) {
-            // int 转16进制
-            return toInt.toString(16).uppercase().padStart(4, '0')
-        } else {
-            val temp = abs(toInt) - 1
-            println("tempToHex2 temp-1:${temp}(0.1温度)")
-            // 不足16位进进行0补全
-            val value = (temp.inv() and 0xFFFF)
-            println("tempToHex2 value:${value}")
-            return value.toString(16).uppercase()
-        }
-    }
-
-
-    /**
      * @param 温度
      * 负数转16进制
      */
@@ -147,7 +167,6 @@ object TestKt {
         println("tempToHex2 value:${value}")
         return value.toString(16).uppercase()
     }
-
 
 
     /**

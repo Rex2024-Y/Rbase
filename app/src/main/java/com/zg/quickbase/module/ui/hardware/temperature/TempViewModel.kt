@@ -77,7 +77,7 @@ class TempViewModel : BaseViewModel() {
                         // 固定取
                         val subText = rxTextHex.substring(6, 10)
                         rxText += "\n温度Hex: $subText"
-                        rxText += "\n温度解析: ${TempUtils.hexToTempString(subText)} ℃"
+                        rxText += "\n温度解析: ${HardWareUtils.hexToTempString(subText)} ℃"
                     } else if (rxTextHex.startsWith("0106")) {
                         "case2".logI()
                         rxText += "\n写入返回无需解析"

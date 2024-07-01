@@ -58,15 +58,15 @@ class TempActivity : BaseActivity() {
                         2 -> {
                             // 设置10/10 ℃ =1 ℃
 //                            etSendInfo.setText("01 06 00 14 00 0A 49 C9")
-                            etSendInfo.setText(TempUtils.setTemp("1"))
+                            etSendInfo.setText(HardWareUtils.setTemp("1"))
                         }
 
                         3 -> {
-                            etSendInfo.setText(TempUtils.setTemp("2"))
+                            etSendInfo.setText(HardWareUtils.setTemp("2"))
                         }
 
                         4 -> {
-                            etSendInfo.setText(TempUtils.setTemp("-1"))
+                            etSendInfo.setText(HardWareUtils.setTemp("-1"))
                         }
                     }
                     mViewModel.sendMsg(this@TempActivity, etSendInfo.text.toString())
