@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.zg.quickbase"
-        minSdk 24
+        minSdk 26
         targetSdk 34
         versionCode 1
         versionName "1.0"
@@ -110,5 +110,10 @@ dependencies {
 //    implementation 'com.github.F1ReKing:Android-SerialPort:1.6.0'
     implementation project(':baselibrary')
 
+    // excel
+//    implementation 'org.apache.poi:poi:3.17'
+//    implementation 'com.alibaba:easyexcel:4.0.1'
 
+//    implementation 'net.sourceforge.jexcelapi:jxl:2.6.12'
+    implementation libs.jxl
 }

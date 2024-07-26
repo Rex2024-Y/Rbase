@@ -17,6 +17,7 @@ import com.zg.quickbase.module.ui.bigdata.camera.CameraActivity
 import com.zg.quickbase.module.ui.bigdata.camera.debug.CameraDoubleActivity
 import com.zg.quickbase.module.ui.bigdatanet.BigDataNetActivity
 import com.zg.quickbase.module.ui.bottomnav.BottomNavActivity
+import com.zg.quickbase.module.ui.function.ExcelActivity
 import com.zg.quickbase.module.ui.function.FunctionActivity
 import com.zg.quickbase.module.ui.function.WebViewActivity
 import com.zg.quickbase.module.ui.function.WebViewLocalActivity
@@ -30,6 +31,7 @@ import com.zg.quickbase.module.ui.http.HttpActivity
 import com.zg.quickbase.module.ui.login.LoginActivity
 import com.zg.quickbase.module.ui.tabbase.TabBaseActivity
 import com.zg.quickbase.module.ui.screen.ScreenMainActivity
+import com.zg.quickbase.module.ui.verticaltab.VerticalTabActivity
 import com.zg.quickbase.viewmodel.MainViewModel
 
 
@@ -179,7 +181,7 @@ class MainActivity : BaseActivity() {
                         }
 
                         3 -> {
-                            ScreenMainActivity::class.java.start()
+                            VerticalTabActivity::class.java.start()
                         }
 
                         4 -> {
@@ -236,7 +238,9 @@ class MainActivity : BaseActivity() {
 //                    manager?.zYsetScreenDirection(0)
 //
 //                }
-                isDefault = !isDefault
+//                isDefault = !isDefault
+
+                ExcelActivity::class.java.start()
             }
 
             8 -> {

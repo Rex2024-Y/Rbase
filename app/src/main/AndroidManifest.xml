@@ -137,6 +137,9 @@
         <activity
             android:name=".module.ui.hardware.scancode.ScanCodeActivity"
             android:exported="false" />
+        <activity
+            android:name=".module.ui.function.ExcelActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
