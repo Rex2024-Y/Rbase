@@ -239,8 +239,22 @@ class MainActivity : BaseActivity() {
 //
 //                }
 //                isDefault = !isDefault
+                showListDialog(
+                    it.text, arrayOf("Apk", "Excel")
+                ) { dialog, which ->
+                    when (which) {
+                        0 -> {
+                            FunctionActivity::class.java.start()
+                        }
 
-                ExcelActivity::class.java.start()
+                        1 -> {
+                            ExcelActivity::class.java.start()
+
+                        }
+                    }
+                    dialog.dismiss()
+                }
+
             }
 
             8 -> {
@@ -273,6 +287,11 @@ class MainActivity : BaseActivity() {
                 holder.setText(R.id.btTitle, text)
             }
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        "onStop".toast()
     }
 
 }

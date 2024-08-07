@@ -45,32 +45,41 @@ class FunctionActivity : BaseActivity() {
             checkUpdate()
         }
 
-        binding.btInstall.setOnClickListener {
-            if (mViewModel.mPath.isNotEmpty()) {
-                mViewModel.mPath.run {
-                    try {
 
-                        "Build.VERSION.SDK_INT:${Build.VERSION.SDK_INT}".logI()
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            if (!packageManager.canRequestPackageInstalls()) {
-                                // 用户尚未授权安装应用，需要请求权限
-                                val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES)
-                                activityResultLauncher.launch(intent)
-                                return@setOnClickListener
-                            }
-                        }
-                        installApk(this@FunctionActivity, this)
-                    } catch (e: Exception) {
-                        "安装失败:$e".logE()
-                        binding.tvRequest.text = "安装失败:$e"
-                    }
-                }
-            } else {
-                "没有下载记录".toast()
-            }
+        binding.btCheckLogin.setOnClickListener {
+            checkUpdate()
+        }
+
+        binding.btInstall.setOnClickListener {
+            installApk()
 
         }
 
+    }
+
+    private fun installApk() {
+        if (mViewModel.mPath.isNotEmpty()) {
+            mViewModel.mPath.run {
+                try {
+
+                    "Build.VERSION.SDK_INT:${Build.VERSION.SDK_INT}".logI()
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        if (!packageManager.canRequestPackageInstalls()) {
+                            // 用户尚未授权安装应用，需要请求权限
+                            val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES)
+                            activityResultLauncher.launch(intent)
+                            return
+                        }
+                    }
+                    installApk(this@FunctionActivity, this)
+                } catch (e: Exception) {
+                    "安装失败:$e".logE()
+                    binding.tvRequest.text = "安装失败:$e"
+                }
+            }
+        } else {
+            "没有下载记录".toast()
+        }
     }
 
     private fun installApk(context: Context, path: String) {
@@ -121,6 +130,9 @@ class FunctionActivity : BaseActivity() {
         mViewModel.mViewDownInfo.observe(this) {
             it?.run {
                 binding.tvRequest.text = this
+                if ("下载完成" == this){
+                    installApk()
+                }
             }
         }
     }
