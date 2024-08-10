@@ -4,6 +4,7 @@ pluginManagement {
         maven { url 'https://maven.aliyun.com/repository/google' }
 //        maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        maven { url "https://gitee.com/superexxxxxx/RexLib/tree/master/local_mavenrepo" }
 
         google {
             content {
@@ -14,12 +15,15 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+        maven { url "https://gitee.com/superexxxxxx/RexLib/tree/master/local_mavenrepo" }
     }
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url "https://gitee.com/superexxxxxx/RexLib/tree/master/local_mavenrepo" }
+
         google()
         mavenCentral()
     }

@@ -109,7 +109,6 @@ dependencies {
     implementation 'com.google.mediapipe:tasks-vision:0.20230731'
 
 //    implementation 'com.github.F1ReKing:Android-SerialPort:1.6.0'
-//    implementation project(':baselibrary')
 
     // excel
 //    implementation 'org.apache.poi:poi:3.17'
@@ -117,4 +116,8 @@ dependencies {
 
 //    implementation 'net.sourceforge.jexcelapi:jxl:2.6.12'
     implementation libs.jxl
+//    implementation 'com.google.base:aar:1.0.0'
+//    implementation 'com.google.base:study:1.0.0'
+    implementation project(':baselibrary')
+
 }

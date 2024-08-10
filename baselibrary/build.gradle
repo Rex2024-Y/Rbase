@@ -113,9 +113,9 @@ afterEvaluate {
         repositories {
             maven {
                 //上传到项目本地仓库
-//                url uri('../local_mavenrepo')
+                url uri('../local_mavenrepo')
 
-                url uri('https://gitee.com/superexxxxxx/RexLib/tree/master')
+//                url uri('https://gitee.com/superexxxxxx/RexLib/tree/master')
 
                 credentials {
                     username "289401595@qq.com"
