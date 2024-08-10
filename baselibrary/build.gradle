@@ -53,8 +53,8 @@ afterEvaluate {
         publications {
             // Creates a Maven publication called "myPublication".
             myPublication(MavenPublication) {
-                groupId 'com.google.base'
-                artifactId 'study'
+                groupId 'com.zg.base'
+                artifactId 'sdk'
                 version '1.0.0'             // Your package version
 //                artifact publishArtifact    //Example: *./target/myJavaClasses.jar*
                 artifact "build/outputs/aar/baselibrary-release.aar"//aar包的目录

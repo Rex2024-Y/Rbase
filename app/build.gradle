@@ -117,7 +117,7 @@ dependencies {
 //    implementation 'net.sourceforge.jexcelapi:jxl:2.6.12'
     implementation libs.jxl
 //    implementation 'com.google.base:aar:1.0.0'
-    implementation 'com.google.base:study:1.0.0'
+    implementation 'com.zg.base:sdk:1.0.0'
 //    implementation project(':baselibrary')
 
 }
