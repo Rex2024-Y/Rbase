@@ -117,10 +117,10 @@ afterEvaluate {
 
 //                url uri('https://gitee.com/superexxxxxx/RexLib/tree/master')
 
-                credentials {
-                    username "289401595@qq.com"
-                    password "@Raner306"
-                }
+//                credentials {
+//                    username "289401595@qq.com"
+//                    password "@Raner306"
+//                }
             }
         }
     }
