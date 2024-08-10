@@ -4,7 +4,7 @@ pluginManagement {
         maven { url 'https://maven.aliyun.com/repository/google' }
 //        maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
-        maven { url "https://gitee.com/superexxxxxx/RexLib/tree/master/local_mavenrepo" }
+        maven { url "https://raw.githubusercontent.com/Rex2024-Y/Rbase/master" }
 
         google {
             content {
@@ -15,17 +15,18 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
-        maven { url "https://gitee.com/superexxxxxx/RexLib/tree/master/local_mavenrepo" }
     }
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
-        maven { url "https://gitee.com/superexxxxxx/RexLib/tree/master/local_mavenrepo" }
+        maven { url "https://raw.githubusercontent.com/Rex2024-Y/Rbase/master" }
 
         google()
         mavenCentral()
+//        local_mavenrepo
+
     }
 }
 

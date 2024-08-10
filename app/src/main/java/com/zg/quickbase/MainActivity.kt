@@ -43,7 +43,6 @@ class MainActivity : BaseActivity() {
 
     //    var manager: ZysjSystemManager? = null
     override fun getRoot(): View? {
-
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         return mBinding?.root
     }

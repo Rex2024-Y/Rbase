@@ -48,7 +48,6 @@ dependencies {
     api 'com.squareup.okhttp3:logging-interceptor:3.14.9'
 }
 
-//url "https://gitee.com/superexxxxxx/RexLib/master"
 afterEvaluate {
     publishing {
         publications {
@@ -113,7 +112,7 @@ afterEvaluate {
         repositories {
             maven {
                 //上传到项目本地仓库
-                url uri('../local_mavenrepo')
+                url uri('../')
 
 //                url uri('https://gitee.com/superexxxxxx/RexLib/tree/master')
 
