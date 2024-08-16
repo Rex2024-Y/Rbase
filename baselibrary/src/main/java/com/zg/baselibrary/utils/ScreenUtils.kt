@@ -57,4 +57,5 @@ object ScreenUtils {
         val density = context.resources.displayMetrics.density
         return px / density
     }
+
 }

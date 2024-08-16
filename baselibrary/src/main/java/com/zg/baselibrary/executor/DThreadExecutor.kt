@@ -12,6 +12,7 @@ class DThreadExecutor {
     // IO线程池
     val ioExecutor =
         Executors.newFixedThreadPool(3)
+
     // 单线程
     val singleExecutor = Executors.newSingleThreadExecutor();
     fun executeUi(command: Runnable) {
@@ -24,10 +25,19 @@ class DThreadExecutor {
         }
     }
 
+    fun executeUi(command: Runnable, delay: Long) {
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            // 当前线程是UI线程，直接运行
+            mainHandler.postDelayed(command, delay)
+        } else {
+            // 切换到UI线程执行
+            mainHandler.postDelayed(command, delay)
+        }
+    }
+
     fun executeIo(command: Runnable) {
         ioExecutor.execute(command)
     }
-
 
 
     fun executeOne(command: Runnable) {
@@ -38,6 +48,7 @@ class DThreadExecutor {
 
         private const val TAG = "UiThreadExecutor"
         fun getInstance() = Holder.mInstance
+
         object Holder {
             val mInstance: DThreadExecutor = DThreadExecutor()
         }

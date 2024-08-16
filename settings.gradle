@@ -4,7 +4,6 @@ pluginManagement {
         maven { url 'https://maven.aliyun.com/repository/google' }
 //        maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
-        maven { url "https://raw.githubusercontent.com/Rex2024-Y/Rbase/master" }
 
         google {
             content {
@@ -14,6 +13,8 @@ pluginManagement {
             }
         }
         mavenCentral()
+        maven { url "https://raw.githubusercontent.com/Rex2024-Y/RLibrary/master" }
+        maven { url 'https://jitpack.io' }
         gradlePluginPortal()
     }
 }
@@ -24,8 +25,8 @@ dependencyResolutionManagement {
 
         google()
         mavenCentral()
-        maven { url "https://raw.githubusercontent.com/Rex2024-Y/Rbase/master" }
-
+        maven { url "https://raw.githubusercontent.com/Rex2024-Y/RLibrary/master" }
+        maven { url 'https://jitpack.io' }
 //        local_mavenrepo
 
     }

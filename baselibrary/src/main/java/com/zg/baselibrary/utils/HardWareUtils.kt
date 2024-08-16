@@ -3,8 +3,8 @@ package com.zg.baselibrary.utils
 import java.util.Locale
 import kotlin.math.abs
 
-
 object HardWareUtils {
+
 
     val addCode = "02"
     val DATA_START = "${addCode}03"
@@ -26,6 +26,17 @@ object HardWareUtils {
     fun getTemp2(): String {
 //        01 03 00 01 00 01 D5 CA
         val start = "$addCode 03 00 01 00 01"
+        LogUtils.log("start:$start")
+        val crc = getCRC(start)
+        LogUtils.log("crc:$crc")
+        val instruct = "$start $crc"
+        LogUtils.log("getTemp2:---------------> \ninstruct:$instruct")
+        return instruct
+    }
+
+    fun getTempSet(): String {
+//        01 03 00 01 00 01 D5 CA
+        val start = "$addCode 03 00 14 00 01"
         LogUtils.log("start:$start")
         val crc = getCRC(start)
         LogUtils.log("crc:$crc")
@@ -69,6 +80,10 @@ object HardWareUtils {
         return instruct
     }
 
+    fun getWeight(): String {
+        return "03 03 07 D0 00 02 C5 64"
+    }
+
 
     /**
      * 整数直接转16进制负数 -1 按位取反 单位℃
@@ -102,7 +117,7 @@ object HardWareUtils {
     /**
      * 16进制带正负转化为10进制
      */
-    fun hexToTempString(hex: String): Float {
+    fun hexToTempString(hex: String): Int {
         LogUtils.log("")
         LogUtils.log("")
         LogUtils.log("--------------->$hex")
@@ -111,10 +126,10 @@ object HardWareUtils {
         // 如果是负数则转为二进制再按位取反再然后得到10进制数值并加上-号
         return if (isNegative) {
             val num = hexToIntTemp(hex)
-            (-num * 100.00f / 1000)
+            (-num * 100 / 1000)
         } else {
             val num = hex.toInt(16)
-            (num * 100.00f / 1000)
+            (num * 100 / 1000)
         }
     }
 
@@ -216,27 +231,11 @@ object HardWareUtils {
         }
     }
 
-    //十六进制转换为二进制
-    fun hexToBinary(value: Int): Long {
-        var HexNumber = value
-        var decimalNumber = 0
-        var count = 0
-        var binaryNumber: Long = 0
-        //十六进制转十进制
-        while (HexNumber != 0) {
-            decimalNumber += (HexNumber % 10 * Math.pow(16.0, count.toDouble())).toInt()
-            ++count
-            HexNumber /= 10
-        }
-
-        count = 1
-        //十进制转二进制
-        while (decimalNumber != 0) {
-            binaryNumber += (decimalNumber % 2 * count).toLong()
-            decimalNumber /= 2
-            count *= 10
-        }
-        return binaryNumber
+    fun hexToBinary(hexString: String): String {
+        // 将十六进制字符串转换为整数
+        val intValue = hexString.toInt(16)
+        // 将整数转换为8位二进制字符串
+        return String.format("%8s", Integer.toBinaryString(intValue)).replace(' ', '0')
     }
 
 
@@ -250,4 +249,3 @@ object HardWareUtils {
     }
 
 }
-

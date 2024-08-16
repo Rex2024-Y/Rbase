@@ -1,4 +1,4 @@
-package com.zg.baselibrary
+package com.zg.baselibrary.manager
 
 import android.annotation.SuppressLint
 import android.content.Context

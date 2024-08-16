@@ -8,7 +8,7 @@ object LogUtils {
 
 
     fun log(msg: String) {
-        logD("NONE", msg)
+        Log.d(BASE_TAG, msg)
     }
 
     fun logD(tag: String, msg: String) {

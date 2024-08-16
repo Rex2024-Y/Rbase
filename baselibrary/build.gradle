@@ -46,6 +46,8 @@ dependencies {
     api 'com.squareup.retrofit2:retrofit:2.9.0'
     api 'com.squareup.retrofit2:converter-gson:2.9.0'
     api 'com.squareup.okhttp3:logging-interceptor:3.14.9'
+
+    api 'com.github.ybq:Android-SpinKit:1.4.0'
 }
 
 afterEvaluate {
@@ -113,9 +115,6 @@ afterEvaluate {
             maven {
                 //上传到项目本地仓库
                 url uri('../')
-
-//                url uri('https://gitee.com/superexxxxxx/RexLib/tree/master')
-
 //                credentials {
 //                    username "289401595@qq.com"
 //                    password "@Raner306"
