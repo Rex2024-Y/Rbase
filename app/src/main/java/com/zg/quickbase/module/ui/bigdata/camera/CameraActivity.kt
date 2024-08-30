@@ -172,7 +172,7 @@ class CameraActivity : BaseActivity(), FaceDetectorHelper.DetectorListener {
             // 拍照用例
             mImageCapture = ImageCapture.Builder()
                 .setTargetRotation(rotation)
-                .setFlashMode(ImageCapture.FLASH_MODE_OFF)
+                .setFlashMode(ImageCapture.FLASH_MODE_ON)
                 .build()
 
             try {
@@ -367,28 +367,7 @@ class CameraActivity : BaseActivity(), FaceDetectorHelper.DetectorListener {
     }
 
     private fun detectorStaticPhoto() {
-        "开始识别".logI()
-        mImageCapture?.run {
-            takePicture(
-                ContextCompat.getMainExecutor(this@CameraActivity),
-                object : ImageCapture.OnImageCapturedCallback() {
-
-                    override fun onCaptureSuccess(image: ImageProxy) {
-                        super.onCaptureSuccess(image)
-                        "detectorStaticPhoto onCaptureSuccess".logI()
-                        // 拍照预览
-                        // ImageProxy 转 Bitmap
-                        val bitmap =
-                            imageProxyToBitmapAndHandle(image, previewJxFzTag, photoRotation)
-                        binding.ivPreview.setImageBitmap(bitmap)
-                    }
-
-                    override fun onError(exception: ImageCaptureException) {
-                        super.onError(exception)
-                        "detectorStaticPhoto onError $exception".logE()
-                    }
-                })
-        }
+        takeStaticPhoto()
     }
 
     fun imageProxyToBitmapAndHandle(

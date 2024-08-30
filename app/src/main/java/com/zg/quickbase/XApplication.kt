@@ -2,7 +2,7 @@ package com.zg.quickbase
 
 import android.app.Application
 import android.util.Log
-import com.zg.baselibrary.ContextManager
+import com.zg.baselibrary.manager.ContextManager
 import java.util.Date
 
 class XApplication : Application() {

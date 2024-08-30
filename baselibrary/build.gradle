@@ -15,8 +15,16 @@ android {
         consumerProguardFiles "consumer-rules.pro"
     }
 
+    publishing {
+        singleVariant("release")
+        singleVariant("debug")
+    }
     buildTypes {
         release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug{
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -35,10 +43,6 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.10.0'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-
 
     // 快速适配器 用于列表
     api "io.github.cymchad:BaseRecyclerViewAdapterHelper4:4.1.4"
@@ -48,78 +52,118 @@ dependencies {
     api 'com.squareup.okhttp3:logging-interceptor:3.14.9'
 
     api 'com.github.ybq:Android-SpinKit:1.4.0'
+
+
+
 }
+
+
+tasks.register('generateSourcesJar', Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier 'sources'
+}
+
 
 afterEvaluate {
     publishing {
         publications {
-            // Creates a Maven publication called "myPublication".
-            myPublication(MavenPublication) {
-                groupId 'com.zg.base'
-                artifactId 'sdk'
-                version '1.0.0'             // Your package version
-//                artifact publishArtifact    //Example: *./target/myJavaClasses.jar*
-                artifact "build/outputs/aar/baselibrary-release.aar"//aar包的目录
-
-                //带上依赖 ，否则会报错
-                pom.withXml {
-                    def dependenciesNode = asNode().appendNode('dependencies')
-
-                    def scopes = [configurations.implementation]
-                    if (configurations.hasProperty("api")) {
-                        scopes.add(configurations.api)
-                    }
-                    if (configurations.hasProperty("implementation")) {
-                        scopes.add(configurations.implementation)
-                    }
-                    if (configurations.hasProperty("debugImplementation")) {
-                        scopes.add(configurations.debugImplementation)
-                    }
-                    if (configurations.hasProperty("releaseImplementation")) {
-                        scopes.add(configurations.releaseImplementation)
-                    }
-
-//                    if (project.ext.targetType != "jar") {
-//                        scopes.add(configurations.provided)
-//                    }
-
-                    scopes.each { scope ->
-                        scope.allDependencies.each {
-                            if (it instanceof ModuleDependency) {
-                                boolean isTransitive = ((ModuleDependency) it).transitive
-                                if (!isTransitive) {
-                                    println "<<<< not transitive dependency: [${it.group}, ${it.name}, ${it.version}]"
-                                    return
-                                }
-                            }
-
-                            if (it.group == "${project.rootProject.name}.libs" || it.version == 'unspecified') {
-                                return
-                            }
-
-                            if (it.group && it.name && it.version) {
-                                def dependencyNode = dependenciesNode.appendNode('dependency')
-                                dependencyNode.appendNode('groupId', it.group)
-                                dependencyNode.appendNode('artifactId', it.name)
-                                dependencyNode.appendNode('version', it.version)
-                                dependencyNode.appendNode('scope', scope.name)
-                            }
-                        }
-                    }
-                }
+            // Creates a Maven publication called "release".
+            group = 'com.github.zgbase'
+            version = '1.0.0'
+            //发布release版本
+            release(MavenPublication) {
+                // Applies the component for the release build variant.
+                from components.release
+                //groupId通常是自己的gitee或者GitHub的账户地址
+                groupId = group
+                //artifactId通常是指待发布项目的名称，也就是别名
+                artifactId = 'ZGBaseLibrary'
+                //version通常是指待发布项目的版本号，这里是写死的，通常我们取项目versionName
+                version = version
             }
-        }
-
-        // Repositories *to* which Gradle can publish artifacts
-        repositories {
-            maven {
-                //上传到项目本地仓库
-                url uri('../')
-//                credentials {
-//                    username "289401595@qq.com"
-//                    password "@Raner306"
-//                }
+            //发布debug版本
+            debug(MavenPublication) {
+                // Applies the component for the release build variant.
+                from components.debug
+                groupId = group
+                artifactId = 'ZGBaseLibrary-debug'
+                version = version
             }
         }
     }
 }
+
+
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            // Creates a Maven publication called "myPublication".
+//            myPublication(MavenPublication) {
+//                groupId 'com.zg.base'
+//                artifactId 'sdk'
+//                version '1.0.0'             // Your package version
+////                artifact publishArtifact    //Example: *./target/myJavaClasses.jar*
+//                artifact "build/outputs/aar/baselibrary-release.aar"//aar包的目录
+//
+//                //带上依赖 ，否则会报错
+//                pom.withXml {
+//                    def dependenciesNode = asNode().appendNode('dependencies')
+//
+//                    def scopes = [configurations.implementation]
+//                    if (configurations.hasProperty("api")) {
+//                        scopes.add(configurations.api)
+//                    }
+//                    if (configurations.hasProperty("implementation")) {
+//                        scopes.add(configurations.implementation)
+//                    }
+//                    if (configurations.hasProperty("debugImplementation")) {
+//                        scopes.add(configurations.debugImplementation)
+//                    }
+//                    if (configurations.hasProperty("releaseImplementation")) {
+//                        scopes.add(configurations.releaseImplementation)
+//                    }
+//
+////                    if (project.ext.targetType != "jar") {
+////                        scopes.add(configurations.provided)
+////                    }
+//
+//                    scopes.each { scope ->
+//                        scope.allDependencies.each {
+//                            if (it instanceof ModuleDependency) {
+//                                boolean isTransitive = ((ModuleDependency) it).transitive
+//                                if (!isTransitive) {
+//                                    println "<<<< not transitive dependency: [${it.group}, ${it.name}, ${it.version}]"
+//                                    return
+//                                }
+//                            }
+//
+//                            if (it.group == "${project.rootProject.name}.libs" || it.version == 'unspecified') {
+//                                return
+//                            }
+//
+//                            if (it.group && it.name && it.version) {
+//                                def dependencyNode = dependenciesNode.appendNode('dependency')
+//                                dependencyNode.appendNode('groupId', it.group)
+//                                dependencyNode.appendNode('artifactId', it.name)
+//                                dependencyNode.appendNode('version', it.version)
+//                                dependencyNode.appendNode('scope', scope.name)
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//        // Repositories *to* which Gradle can publish artifacts
+//        repositories {
+//            maven {
+//                //上传到项目本地仓库
+//                url uri('../')
+////                credentials {
+////                    username "289401595@qq.com"
+////                    password "@Raner306"
+////                }
+//            }
+//        }
+//    }
+//}

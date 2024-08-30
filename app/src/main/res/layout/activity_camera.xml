@@ -148,20 +148,21 @@
                     android:id="@+id/btPostFace"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="A" />
+                    android:text="拍照带闪光" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
+                android:visibility="gone"
                 android:paddingRight="10dp">
 
                 <Button
                     android:id="@+id/btDetectorFace"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="B" />
+                    android:text="拍照带闪光" />
             </LinearLayout>
         </LinearLayout>
 
