@@ -81,7 +81,6 @@ dependencies {
     implementation libs.androidx.navigation.ui.ktx
 //    implementation files('libs\\ZY-Interface-11.jar')
 //    implementation files('libs\\ChiceScanGun.jar')
-//    implementation name: 'baselibrary-release', ext: 'aar'
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
@@ -119,7 +118,7 @@ dependencies {
     implementation libs.jxl
 //    implementation 'com.google.base:aar:1.0.0'
 //    implementation 'com.zg.base:sdk:1.0.0'
-//    implementation 'com.github.Rex2024-Y:RLibrary:V1.0.0'
-    api project(':baselibrary')
-
+//    api project(':baselibrary')
+//    implementation 'com.github.Rex2024-Y:Rbase:v1.0.5'
+    implementation 'com.github.Rex2024-Y.Rbase:baselibrary:v1.0.5'
 }

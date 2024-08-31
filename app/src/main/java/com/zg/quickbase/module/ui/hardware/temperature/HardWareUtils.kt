@@ -1,6 +1,6 @@
 package com.zg.quickbase.module.ui.hardware.temperature
 
-import com.zg.quickbase.utils.LogUtils
+import com.zg.baselibrary.utils.LogUtils
 import java.util.Locale
 import kotlin.math.abs
 

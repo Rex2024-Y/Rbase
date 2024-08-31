@@ -13,7 +13,6 @@ pluginManagement {
             }
         }
         mavenCentral()
-        maven { url "https://raw.githubusercontent.com/Rex2024-Y/RLibrary/master" }
         maven { url 'https://jitpack.io' }
         gradlePluginPortal()
     }
@@ -25,7 +24,6 @@ dependencyResolutionManagement {
 
         google()
         mavenCentral()
-        maven { url "https://raw.githubusercontent.com/Rex2024-Y/RLibrary/master" }
         maven { url 'https://jitpack.io' }
 //        local_mavenrepo
 

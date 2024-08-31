@@ -4,8 +4,8 @@ package com.zg.quickbase.module.ui.bigdata.camera
 import android.graphics.Bitmap
 import android.widget.ImageView
 import androidx.lifecycle.ViewModel
+import com.zg.baselibrary.utils.LogUtils
 import com.zg.quickbase.utils.Base64Utils
-import com.zg.quickbase.utils.LogUtils
 import java.io.ByteArrayOutputStream
 
 
