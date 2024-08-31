@@ -63,6 +63,8 @@ object HardWareUtils {
     }
 
 
+
+
     /**
      * 业务举例 设置温度封装
      * @param 温度只支持整数（结合实际需求也可以支持小数）
@@ -82,6 +84,16 @@ object HardWareUtils {
 
     fun getWeight(): String {
         return "03 03 07 D0 00 02 C5 64"
+    }
+
+    fun resetWeightZero():String{
+        return "03 10 0B B8 00 02 04 00 00 00 0A 01 F2"
+    }
+     fun clearWeightPlate():String{
+        return "03 10 0B BA 00 02 04 00 00 27 10 1A 10"
+    }
+    fun confirmWeightReset():String{
+        return "03 10 0B B8 00 02 04 00 00 00 14 81 FA"
     }
 
 
@@ -247,5 +259,11 @@ object HardWareUtils {
         }
         return str
     }
+
+
+    /**
+     * 去皮清零
+     */
+
 
 }

@@ -34,9 +34,34 @@ object TestKt {
 //        println("CRC 01 06 00 14 00 0A:${getCRC("01 06 00 14 00 0A")}")
 //
 //        println("startsWith 0103:${"01030200FA3807".startsWith("0103")}")
-        println(hexToBinary("3F"))
+//        println(hexToBinary("3F"))
+//        println(handleWeight("030304FFFFFF92198A")) 0A4A
+        println("zero weight:"+ getCRC("01 10 0B B8 00 02 04 00 00 00 0A"))
+        // 01 F2
+        println("zero weight:"+ getCRC("03 10 0B B8 00 02 04 00 00 00 0A"))
+        println("zero weight2:"+ getCRC("01 10 0B BA 00 02 04 00 00 27 10"))
+        //03 10 0B BA 00 02 04 00 00 27 10 1A 10
+        println("zero weight2:"+ getCRC("03 10 0B BA 00 02 04 00 00 27 10"))
+        //03 10 0B B8 00 02 04 00 00 00 14 81 FA
+        println("zero weight3:"+ getCRC("03 10 0B B8 00 02 04 00 00 00 14"))
+
+    }
 
 
+
+    private fun handleWeight( sHexText: String) {
+//        030304 FFFF FF92 198A 负数
+        try {
+            val string2 = sHexText.substring(6, 14)
+            // 16进制转10进制
+            val num = string2.toLong(16).toInt()
+            val currWeightValue = num * 100.00f / 10000
+            val des = "$num 当前重物传感重量为:   ${currWeightValue}  kg "
+            print(des)
+        } catch (e: Exception) {
+//            "当前秤或为负数请检查设备".toastWithLog()
+            print("当前秤或为负数请检查设备:$e")
+        }
     }
 
     fun hexToBinary(hexString: String): String {

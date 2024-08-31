@@ -66,8 +66,6 @@ class MainActivity : BaseActivity() {
         // 直接获取的api
         "densityDpi: ${configuration.densityDpi}".logI()
         "screenWidthDp: ${configuration.screenWidthDp}".toast()
-        // 特殊测试apk
-        CameraActivity::class.java.start()
 //configuration.screenHeightDp  当前屏幕可用空间的高度，单位是dp
 //configuration.screenWidthDp   当前屏幕可用空间的宽度，单位是dp
 //configuration.densityDpi      当前设备的dpi信息

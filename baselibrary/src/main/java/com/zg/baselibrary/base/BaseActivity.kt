@@ -10,6 +10,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -361,6 +362,31 @@ open abstract class BaseActivity : AppCompatActivity() {
         return loadingDialog
 
     }
+
+
+    var mProgressDialog: AlertDialog? = null
+    var tvProgressContent: TextView? = null
+    var tvProgressProgress: TextView? = null
+    var progressBar: ProgressBar? = null
+    fun showProgressDialog(title: String? = null): AlertDialog? {
+        val builder = AlertDialog.Builder(this@BaseActivity)
+        val view: View = View.inflate(this, R.layout.dialog_progress, null)
+        val tvTitle = view.findViewById<TextView>(R.id.tvTitle)
+        tvProgressContent = view.findViewById(R.id.tvContent)
+        tvProgressProgress = view.findViewById(R.id.tvProgress)
+        progressBar = view.findViewById(R.id.pb)
+        title?.run {
+            tvTitle.text = title
+        }
+        builder.setView(view)
+        mProgressDialog = builder.create()
+        mProgressDialog?.setCanceledOnTouchOutside(false)
+        mProgressDialog?.show()
+        mProgressDialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        return mProgressDialog
+
+    }
+
 
     fun dismissLoading() {
         loadingDialog?.dismiss()
